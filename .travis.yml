@@ -14,6 +14,6 @@ notifications:
       - javier.reyes.mangas@alumnos.upm.es
       - j.conejol@alumnos.upm.es
       - s.banegas@alumnos.upm.es
-      - cokelas@gmail.com
+      - jorge.martinez.lascorz@alumnos.upm.es
 
 script: mvn verify
