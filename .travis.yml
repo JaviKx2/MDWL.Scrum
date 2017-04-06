@@ -12,5 +12,8 @@ notifications:
   email:
     recipients:
       - javier.reyes.mangas@alumnos.upm.es
+      - j.conejol@alumnos.upm.es
+      - s.banegas@alumnos.upm.es
+      - cokelas@gmail.com
 
 script: mvn verify
