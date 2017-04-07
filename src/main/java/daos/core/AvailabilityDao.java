@@ -15,4 +15,6 @@ public interface AvailabilityDao extends JpaRepository<Availability, Long> {
     List<Availability> findIfRoomIsAvailable(long roomId, Date entryDate, Date departureDate);
 
     List<Availability> findByRoomAndStartDate(Room room, Date startDate);
+
+    List<Availability> findByRoomAndEndingDate(Room room, Date endingDate);
 }
