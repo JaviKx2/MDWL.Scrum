@@ -43,15 +43,18 @@ public class Reservation {
     @JoinColumn
     private User user;
 
+    private int numberOfPeople;
+
     private double price;
 
     public Reservation() {
 
     }
 
-    public Reservation(Date entryDate, Date departureDate, Room room, User user) {
+    public Reservation(Date entryDate, Date departureDate, int numberOfPeople, Room room, User user) {
         this.entryDate = entryDate;
         this.departureDate = departureDate;
+        this.numberOfPeople = numberOfPeople;
         this.room = room;
         this.user = user;
         this.hours = Hours.hoursBetween(new DateTime(entryDate), new DateTime(departureDate)).getHours();
@@ -114,6 +117,14 @@ public class Reservation {
         this.user = user;
     }
 
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -125,7 +136,7 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation [id=" + id + ", entryDate=" + entryDate + ", departureDate=" + departureDate + ", hours=" + hours + ", code="
-                + code + ", room=" + room + ", user=" + user + ", price=" + price + "]";
+                + code + ", room=" + room + ", user=" + user + ", numberOfPeople=" + numberOfPeople + ", price=" + price + "]";
     }
 
     @Override
@@ -137,6 +148,7 @@ public class Reservation {
         result = prime * result + ((entryDate == null) ? 0 : entryDate.hashCode());
         result = prime * result + hours;
         result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + numberOfPeople;
         long temp;
         temp = Double.doubleToLongBits(price);
         result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -172,6 +184,8 @@ public class Reservation {
         if (hours != other.hours)
             return false;
         if (id != other.id)
+            return false;
+        if (numberOfPeople != other.numberOfPeople)
             return false;
         if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
             return false;
