@@ -28,7 +28,7 @@ public class ReservationTest {
         List<String> services = new ArrayList<>();
         services.add("Jacuzzi");
         services.add("Internet");
-        Room room = new Room(101, RoomType.SINGLE, 15.5, null, services);
+        Room room = new Room(101, RoomType.SINGLE, 15.5, 1, null, services);
         Date entryDate = sdf.parse("31-08-2017 10:20");
         Date departureDate = sdf.parse("04-09-2017 20:40");
         User user = new User("mdw@upm.es", "12341234", "Rodrigo", "García", Permissions.BASIC);

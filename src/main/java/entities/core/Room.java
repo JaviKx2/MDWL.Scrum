@@ -23,6 +23,8 @@ public class Room {
 
     private double price;
 
+    private int capacity;
+
     @ManyToOne
     @JoinColumn
     private Hotel hotel;
@@ -33,10 +35,11 @@ public class Room {
     public Room() {
     }
 
-    public Room(int number, RoomType type, double price, Hotel hotel, List<String> services) {
+    public Room(int number, RoomType type, double price, int capacity, Hotel hotel, List<String> services) {
         this.number = number;
         this.type = type;
         this.price = price;
+        this.capacity = capacity;
         this.hotel = hotel;
         this.services = services;
     }
@@ -73,6 +76,14 @@ public class Room {
         this.price = price;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     public Hotel getHotel() {
         return hotel;
     }
@@ -91,14 +102,15 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room [id=" + id + ", type=" + type + ", number=" + number + ", price=" + price + ", hotel=" + hotel + ", services="
-                + services + "]";
+        return "Room [id=" + id + ", type=" + type + ", number=" + number + ", price=" + price + ", capacity=" + capacity + ", hotel="
+                + hotel + ", services=" + services + "]";
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + capacity;
         result = prime * result + ((hotel == null) ? 0 : hotel.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + number;
@@ -119,6 +131,8 @@ public class Room {
         if (getClass() != obj.getClass())
             return false;
         Room other = (Room) obj;
+        if (capacity != other.capacity)
+            return false;
         if (hotel == null) {
             if (other.hotel != null)
                 return false;

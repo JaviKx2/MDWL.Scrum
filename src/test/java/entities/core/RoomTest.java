@@ -19,7 +19,7 @@ public class RoomTest {
         services.add("Jacuzzi");
         services.add("Internet");
         Hotel hotel = new Hotel("Meliá Princesa", "28008", "Madrid", "Image", null, null);
-        room = new Room(101, RoomType.SINGLE, 15.5, hotel, services);
+        room = new Room(101, RoomType.SINGLE, 15.5, 1, hotel, services);
     }
 
     @Test
@@ -27,6 +27,7 @@ public class RoomTest {
         assertEquals(101, room.getNumber());
         assertEquals(RoomType.SINGLE, room.getType());
         assertEquals(15.5, room.getPrice(), 0.01);
+        assertEquals(1, room.getCapacity());
         assertTrue(room.getServices().contains("Jacuzzi"));
         assertNotNull(room.getHotel());
     }
