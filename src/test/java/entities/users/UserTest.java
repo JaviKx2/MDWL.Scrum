@@ -1,4 +1,4 @@
-package entities.core;
+package entities.users;
 
 import static org.junit.Assert.*;
 

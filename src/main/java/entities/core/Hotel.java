@@ -1,12 +1,20 @@
 package entities.core;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import entities.users.User;
 
+@Entity
 public class Hotel {
+
+    @Id
+    @GeneratedValue
+    private long id;
 
     private String name;
 
@@ -21,6 +29,8 @@ public class Hotel {
     @Lob
     private String image;
 
+    @ManyToOne
+    @JoinColumn
     private HotelChain hotelChain;
 
     public Hotel() {

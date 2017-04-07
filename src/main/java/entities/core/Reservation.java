@@ -51,7 +51,8 @@ public class Reservation {
 
     }
 
-    public Reservation(Date entryDate, Date departureDate, int numberOfPeople, Room room, User user) {
+    public Reservation(String code, Date entryDate, Date departureDate, int numberOfPeople, Room room, User user) {
+        this.code = code;
         this.entryDate = entryDate;
         this.departureDate = departureDate;
         this.numberOfPeople = numberOfPeople;
