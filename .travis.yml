@@ -1,0 +1,19 @@
+language: java
+
+jdk:
+  - oraclejdk8
+  
+branches:
+  only:
+    - master
+    - develop
+    
+notifications:
+  email:
+    recipients:
+      - javier.reyes.mangas@alumnos.upm.es
+      - j.conejol@alumnos.upm.es
+      - s.banegas@alumnos.upm.es
+      - jorge.martinez.lascorz@alumnos.upm.es
+
+script: mvn verify
