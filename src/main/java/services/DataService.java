@@ -1,5 +1,7 @@
 package services;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class DataService {
 
     @Autowired
     private DatabaseSeeder populate;
+
+    @Autowired
+    private PopulateService populateService;
 
     @Autowired
     private UserDao userDao;
@@ -43,6 +48,10 @@ public class DataService {
         userDao.deleteAll();
 
         populate.createDefaultAdmin();
+    }
+
+    public void populate() throws ParseException {
+        populateService.populate();
     }
 
 }
