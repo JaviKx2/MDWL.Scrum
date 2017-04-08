@@ -17,6 +17,7 @@ import entities.core.Reservation;
 import entities.core.Room;
 import entities.users.User;
 import wrappers.ReservationPostWrapper;
+import wrappers.ReservationWrapper;
 
 @Controller
 public class ReservationController {
@@ -33,8 +34,11 @@ public class ReservationController {
     @Autowired
     private AvailabilityDao availabilityDao;
 
-    public Reservation add(ReservationPostWrapper reservationWrapper) {
+    public ReservationWrapper add(ReservationPostWrapper reservationWrapper) {
         Reservation reservationAdded = null;
+        if (reservationWrapper.getDepartureDate().before(reservationWrapper.getEntryDate())) {
+            return null;
+        }
         User user = userDao.findOne(reservationWrapper.getUserId());
         Room room = roomDao.findOne(reservationWrapper.getRoomId());
         String code = reservationWrapper.getRoomId() + System.currentTimeMillis() + "";
@@ -64,7 +68,7 @@ public class ReservationController {
             reservationAdded = reservationDao.save(reservation);
             availabilityDao.delete(availability);
         }
-        return reservationAdded;
+        return new ReservationWrapper(reservationAdded);
     }
 
 }
