@@ -43,8 +43,8 @@ public class ReservationResourceFunctionalTesting {
         ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
         ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).clazz(ReservationWrapper.class).post().build();
-        assertEquals(sdf.parse("31-08-2017 14:20"), reservation.getEntryDate());
-        assertEquals(sdf.parse("31-08-2017 17:20"), reservation.getDepartureDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 14:20")), reservation.getEntryDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 17:20")), reservation.getDepartureDate());
         assertEquals(3, reservation.getHours());
         assertNotNull(reservation.getRoomId());
         assertEquals(1, reservation.getNumberOfPeople());
@@ -64,7 +64,7 @@ public class ReservationResourceFunctionalTesting {
     @Test
     public void testAddReservationWithDatesNotValid() throws ParseException {
         Date entryDate = sdf.parse("31-08-2017 20:20");
-        Date departureDate = sdf.parse("31-08-2017 23:20");
+        Date departureDate = sdf.parse("31-08-2017 19:20");
         Room room = roomDao.findAll().get(0);
         User user = userDao.findAll().get(1);
         ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
