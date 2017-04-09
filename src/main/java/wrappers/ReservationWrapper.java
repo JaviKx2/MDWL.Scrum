@@ -1,15 +1,16 @@
 
 package wrappers;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import entities.core.Reservation;
 
 public class ReservationWrapper {
 
-    private Date entryDate;
+    private String entryDate;
 
-    private Date departureDate;
+    private String departureDate;
 
     private int hours;
 
@@ -29,8 +30,9 @@ public class ReservationWrapper {
 
     public ReservationWrapper(Date entryDate, Date departureDate, int hours, String code, long roomId, long userId, int numberOfPeople,
             double price) {
-        this.entryDate = entryDate;
-        this.departureDate = departureDate;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
+        this.entryDate = sdf.format(entryDate);
+        this.departureDate = sdf.format(departureDate);
         this.hours = hours;
         this.code = code;
         this.roomId = roomId;
@@ -40,8 +42,9 @@ public class ReservationWrapper {
     }
 
     public ReservationWrapper(Reservation reservation) {
-        this.entryDate = reservation.getEntryDate();
-        this.departureDate = reservation.getDepartureDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
+        this.entryDate = sdf.format(reservation.getEntryDate());
+        this.departureDate = sdf.format(reservation.getDepartureDate());
         this.hours = reservation.getHours();
         this.code = reservation.getCode();
         this.roomId = reservation.getRoom().getId();
@@ -50,19 +53,19 @@ public class ReservationWrapper {
         this.price = reservation.getPrice();
     }
 
-    public Date getEntryDate() {
+    public String getEntryDate() {
         return entryDate;
     }
 
-    public void setEntryDate(Date entryDate) {
+    public void setEntryDate(String entryDate) {
         this.entryDate = entryDate;
     }
 
-    public Date getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
