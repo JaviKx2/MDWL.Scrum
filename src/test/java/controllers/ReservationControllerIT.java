@@ -49,8 +49,8 @@ public class ReservationControllerIT {
                 room.getId(), user.getId(), 1);
         ReservationWrapper reservation = reservationController.add(reservationWrapper);
         assertNotNull(reservation);
-        assertEquals(sdf.parse("31-08-2017 14:20"), reservation.getEntryDate());
-        assertEquals(sdf.parse("31-08-2017 17:20"), reservation.getDepartureDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 14:20")), reservation.getEntryDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 17:20")), reservation.getDepartureDate());
         assertEquals(3, reservation.getHours());
         assertNotNull(reservation.getRoomId());
         assertEquals(1, reservation.getNumberOfPeople());
@@ -75,8 +75,8 @@ public class ReservationControllerIT {
                 room.getId(), user.getId(), 1);
         ReservationWrapper reservation = reservationController.add(reservationWrapper);
         assertNotNull(reservation);
-        assertEquals(sdf.parse("31-08-2017 14:20"), reservation.getEntryDate());
-        assertEquals(sdf.parse("31-08-2017 20:20"), reservation.getDepartureDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 14:20")), reservation.getEntryDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 20:20")), reservation.getDepartureDate());
         assertEquals(6, reservation.getHours());
         assertNotNull(reservation.getRoomId());
         assertEquals(1, reservation.getNumberOfPeople());
@@ -98,8 +98,8 @@ public class ReservationControllerIT {
                 room.getId(), user.getId(), 1);
         ReservationWrapper reservation = reservationController.add(reservationWrapper);
         assertNotNull(reservation);
-        assertEquals(sdf.parse("31-08-2017 12:20"), reservation.getEntryDate());
-        assertEquals(sdf.parse("31-08-2017 17:20"), reservation.getDepartureDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 12:20")), reservation.getEntryDate());
+        assertEquals(sdf.format(sdf.parse("31-08-2017 17:20")), reservation.getDepartureDate());
         assertEquals(5, reservation.getHours());
         assertNotNull(reservation.getRoomId());
         assertEquals(1, reservation.getNumberOfPeople());
