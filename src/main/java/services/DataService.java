@@ -10,6 +10,7 @@ import daos.core.HotelChainDao;
 import daos.core.HotelDao;
 import daos.core.ReservationDao;
 import daos.core.RoomDao;
+import daos.users.TokenDao;
 import daos.users.UserDao;
 
 @Service
@@ -38,6 +39,9 @@ public class DataService {
 
     @Autowired
     private AvailabilityDao availabilityDao;
+    
+    @Autowired
+    private TokenDao tokenDao;
 
     public void deleteAllExceptAdmin() {
         availabilityDao.deleteAll();
@@ -45,7 +49,8 @@ public class DataService {
         roomDao.deleteAll();
         hotelDao.deleteAll();
         hotelChainDao.deleteAll();
-        userDao.deleteAll();
+        //tokenDao.deleteAll();
+        //userDao.deleteAll();
 
         populate.createDefaultAdmin();
     }

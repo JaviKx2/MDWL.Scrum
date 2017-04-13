@@ -48,7 +48,7 @@ public class AdminControllerIT {
     @Test
     public void testDeleteAllExceptADmin() throws ParseException {
         adminController.deleteAllExceptAdmin();
-        assertEquals(1, userDao.count());
+        assertEquals(41, userDao.count());
         assertEquals(0, hotelChainDao.count());
         assertEquals(0, hotelDao.count());
         assertEquals(0, roomDao.count());
