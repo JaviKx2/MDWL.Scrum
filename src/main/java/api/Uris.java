@@ -9,5 +9,10 @@ public class Uris {
     public static final String ADMIN = "/admin";
 
     public static final String RESERVATIONS = "/reservations";
+    
+    public static final String LOGIN = "/login";
+    
+    public static final String TOKENS = "/token";
+
 
 }

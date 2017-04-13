@@ -22,17 +22,17 @@ public class UserDaoIT {
 
     @Test
     public void testCountUsers() {
-        assertEquals(36, userDao.count());
+        assertEquals(41, userDao.count());
     }
 
     @Test
     public void testOneUser() {
         User user = userDao.findAll().get(1);
-        assertEquals("email0", user.getEmail());
-        assertEquals("password0", user.getPassword());
-        assertEquals("name0", user.getName());
-        assertEquals("surname0", user.getSurname());
-        assertEquals(Permissions.HOTELCHAIN_MANAGER, user.getPermissions());
+        assertEquals("appmanager@gmail.com", user.getEmail());
+        assertEquals("appmanager", user.getPassword());
+        assertEquals("appmanager", user.getName());
+        assertEquals("appmanager surname", user.getSurname());
+        assertEquals(Permissions.APP_MANAGER, user.getPermissions());
     }
 
 }

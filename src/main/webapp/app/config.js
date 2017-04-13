@@ -8,6 +8,11 @@ booking.config(function ($routeProvider) {
 	        controller: "NewReservationController",
 	        controllerAs: "vm"
 	    })
+	    .when('/login', {
+	        templateUrl: "app/components/login/loginView.html",
+	        controller: "LoginController",
+	        controllerAs: "vm"
+	    })
         .otherwise({
             redirectTo: '/'
         });

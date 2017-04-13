@@ -48,9 +48,9 @@ public class PopulateService {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
 
     public void populate() throws ParseException {
-        this.createUsers(0, 5, Permissions.HOTELCHAIN_MANAGER);
-        this.createUsers(5, 25, Permissions.HOTEL_MANAGER);
-        this.createUsers(25, 35, Permissions.BASIC);
+        //this.createUsers(0, 5, Permissions.HOTELCHAIN_MANAGER);
+        //this.createUsers(5, 25, Permissions.HOTEL_MANAGER);
+        //this.createUsers(25, 35, Permissions.BASIC);
         this.createHotelChains();
         this.createHotels();
         this.createRooms();
