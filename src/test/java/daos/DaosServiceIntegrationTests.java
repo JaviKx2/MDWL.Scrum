@@ -51,7 +51,7 @@ public class DaosServiceIntegrationTests {
     @Autowired
     private ReservationDao reservationDao;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @PostConstruct
     public void populate() throws ParseException {
@@ -120,6 +120,17 @@ public class DaosServiceIntegrationTests {
             availability = new Availability(roomDao.findAll().get(i), date1, date2);
             availabilityDao.save(availability);
         }
+
+        availability = new Availability(roomDao.findOne(2L), sdf.parse(dateString + " 04:00"), sdf.parse(dateString + " 20:00"));
+        availabilityDao.save(availability);
+        availability = new Availability(roomDao.findOne(1L), sdf.parse(dateString + " 17:00"), sdf.parse(dateString + " 21:00"));
+        availabilityDao.save(availability);
+        availability = new Availability(roomDao.findOne(1L), sdf.parse(dateString + " 15:00"), sdf.parse(dateString + " 16:00"));
+        availabilityDao.save(availability);
+        availability = new Availability(roomDao.findOne(3L), sdf.parse(dateString + " 17:00"), sdf.parse(dateString + " 18:00"));
+        availabilityDao.save(availability);
+        availability = new Availability(roomDao.findOne(3L), sdf.parse(dateString + " 21:00"), sdf.parse(dateString + " 23:00"));
+        availabilityDao.save(availability);
     }
 
     public void deleteAll() {

@@ -13,7 +13,7 @@ public class AvailabilityTest {
 
     private Availability availability;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @Before
     public void before() throws ParseException {

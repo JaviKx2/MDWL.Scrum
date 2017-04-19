@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,11 +27,11 @@ public class AvailabilityDaoIT {
     @Autowired
     private RoomDao roomDao;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @Test
     public void testCountAvailability() {
-        assertEquals(4, availabilityDao.count());
+        assertEquals(9, availabilityDao.count());
     }
 
     @Test
@@ -50,4 +51,33 @@ public class AvailabilityDaoIT {
                 .isEmpty());
     }
 
+    @Test
+    public void testSearchAllAvailabilitiesBetween16and21() throws ParseException {
+        List<Availability> avaliabilities = availabilityDao.search(null, null, null, sdf.parse("31-08-2017 16:00"), sdf.parse("31-08-2017 18:00"));
+        assertEquals(7, avaliabilities.size());
+    }
+    
+    @Test
+    public void testSearchHotel1Availabilities() throws ParseException {
+        List<Availability> avaliabilities = availabilityDao.search("hotel1", null, null, null, null);
+        assertEquals(3, avaliabilities.size());
+    }
+    
+    @Test
+    public void testSearchCity2Availabilities() throws ParseException {
+        List<Availability> avaliabilities = availabilityDao.search(null, "city2", null, null, null);
+        assertEquals(2, avaliabilities.size());
+    }
+    
+    @Test
+    public void testSearchPostcode3Availabilities() throws ParseException {
+        List<Availability> avaliabilities = availabilityDao.search(null, null, "postcode3", null, null);
+        assertEquals(3, avaliabilities.size());
+    }
+    
+    @Test
+    public void testSearchHotel1PostCode1City1AvailabilitiesBetween16and21() throws ParseException {
+        List<Availability> avaliabilities = availabilityDao.search("hotel1", "city1", "postcode1", sdf.parse("31-08-2017 16:00"), sdf.parse("31-08-2017 18:00"));
+        assertEquals(2, avaliabilities.size());
+    }
 }

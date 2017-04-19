@@ -45,7 +45,7 @@ public class PopulateService {
     @Autowired
     private ReservationDao reservationDao;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     public void populate() throws ParseException {
         //this.createUsers(0, 5, Permissions.HOTELCHAIN_MANAGER);

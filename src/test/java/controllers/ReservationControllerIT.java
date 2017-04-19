@@ -39,7 +39,7 @@ public class ReservationControllerIT {
     @Autowired
     private ReservationController reservationController;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @Test
     public void testReservationWithTwoNewAvailabilities() throws ParseException {
