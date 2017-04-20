@@ -1,6 +1,8 @@
 package api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +24,7 @@ import daos.users.TokenDao;
 import daos.users.UserDao;
 import entities.core.Room;
 import entities.users.User;
-import services.DataService;
+import services.DatabaseSeeder;
 import wrappers.ReservationPostWrapper;
 import wrappers.ReservationWrapper;
 
@@ -42,7 +44,7 @@ public class ReservationResourceFunctionalTesting {
     private TokenDao tokenDao;
     
     @Autowired
-    private DataService dataService;
+    private DatabaseSeeder databaseSeeder;
     
     @Test(expected = HttpClientErrorException.class)
     public void testWithoutHeader() throws ParseException {
@@ -129,8 +131,8 @@ public class ReservationResourceFunctionalTesting {
      */
     @After
     public void tearDown() throws ParseException {
-        dataService.deleteAllExceptAdmin();
-        dataService.populate();
+        databaseSeeder.deleteAllExceptAdmin();
+        databaseSeeder.populate();
     }
 
 }

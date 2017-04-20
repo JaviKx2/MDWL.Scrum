@@ -21,7 +21,7 @@ import daos.core.HotelDao;
 import daos.core.ReservationDao;
 import daos.core.RoomDao;
 import daos.users.UserDao;
-import services.DataService;
+import services.DatabaseSeeder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
@@ -49,7 +49,7 @@ public class AdminControllerIT {
     private AvailabilityDao availabilityDao;
     
     @Autowired
-    private DataService dataService;
+    private DatabaseSeeder databaseSeeder;
 
     @Test
     public void testDeleteAllExceptAdmin() throws ParseException {
@@ -76,7 +76,7 @@ public class AdminControllerIT {
      */
     @After
     public void tearDownOnce() throws ParseException {
-        dataService.deleteAllExceptAdmin();
-        dataService.populate();
+        databaseSeeder.deleteAllExceptAdmin();
+        databaseSeeder.populate();
     }
 }

@@ -199,5 +199,17 @@ public class DatabaseSeeder {
         availability = new Availability(roomDao.findByHotelName("hotel13").get(0), sdf.parse(dateString + " 21:00"), sdf.parse(dateString + " 23:00"));
         availabilityDao.save(availability);
     }
+    
+    public void deleteAllExceptAdmin() {
+        availabilityDao.deleteAll();
+        reservationDao.deleteAll();
+        roomDao.deleteAll();
+        hotelDao.deleteAll();
+        hotelChainDao.deleteAll();
+        tokenDao.deleteAll();
+        userDao.deleteAll();
+
+        createDefaultAdmin();
+    }
 
 }

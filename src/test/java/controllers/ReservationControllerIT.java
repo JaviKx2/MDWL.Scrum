@@ -24,7 +24,7 @@ import daos.core.RoomDao;
 import daos.users.UserDao;
 import entities.core.Room;
 import entities.users.User;
-import services.DataService;
+import services.DatabaseSeeder;
 import wrappers.ReservationPostWrapper;
 import wrappers.ReservationWrapper;
 
@@ -47,7 +47,7 @@ public class ReservationControllerIT {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     
     @Autowired
-    private DataService dataService;
+    private DatabaseSeeder databaseSeeder;
 
     @Test
     public void testReservationWithTwoNewAvailabilities() throws ParseException {
@@ -127,8 +127,8 @@ public class ReservationControllerIT {
      */
     @After
     public void tearDown() throws ParseException {
-        dataService.deleteAllExceptAdmin();
-        dataService.populate();
+        databaseSeeder.deleteAllExceptAdmin();
+        databaseSeeder.populate();
     }
 
 }

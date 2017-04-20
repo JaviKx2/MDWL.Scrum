@@ -7,20 +7,20 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import services.DataService;
+import services.DatabaseSeeder;
 
 @Service
 public class DaosServiceIntegrationTests {
 
     @Autowired
-    private DataService dataService;
+    private DatabaseSeeder databaseSeeder;
 
     @PostConstruct
     public void populate() throws ParseException {
-        this.dataService.populate();
+        this.databaseSeeder.populate();
     }
 
     public void deleteAll() {
-        dataService.deleteAllExceptAdmin();
+        databaseSeeder.deleteAllExceptAdmin();
     }
 }

@@ -1,5 +1,8 @@
 package services;
 
+import java.text.ParseException;
+
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +17,19 @@ import config.TestsPersistenceConfig;
 public class DataServiceIT {
 
     @Autowired
-    DataService dataService;
+    DatabaseSeeder databaseSeeder;
 
     @Test
     public void testDeleteAllExceptAdmin() {
-        dataService.deleteAllExceptAdmin();
+        databaseSeeder.deleteAllExceptAdmin();
+    }
+    
+    /**
+     * Leave database as it was before tests
+     * @throws ParseException
+     */
+    @After
+    public void tearDown() throws ParseException {
+        databaseSeeder.populate();
     }
 }

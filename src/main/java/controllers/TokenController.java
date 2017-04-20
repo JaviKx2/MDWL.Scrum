@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.users.TokenDao;
-import daos.users.UserDao;
 import entities.users.Permissions;
 import entities.users.Token;
-import entities.users.User;
 
 @Controller
 @Transactional

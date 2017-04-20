@@ -5,19 +5,19 @@ import java.text.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import services.DataService;
+import services.DatabaseSeeder;
 
 @Controller
 public class AdminController {
 
     @Autowired
-    private DataService dataService;
+    private DatabaseSeeder databaseSeeder;
 
     public void deleteAllExceptAdmin() {
-        dataService.deleteAllExceptAdmin();
+        databaseSeeder.deleteAllExceptAdmin();
     }
 
     public void populate() throws ParseException {
-        dataService.populate();
+        databaseSeeder.populate();
     }
 }
