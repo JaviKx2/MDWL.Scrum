@@ -2,7 +2,6 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -151,18 +150,16 @@ public class DatabaseSeeder {
     public void createHotels() {
         Hotel hotel;
         for (int i = 0; i < 20; i++) {
-            hotel = new Hotel("hotel" + i, "postcode" + i, "city" + i, "image" + i, userDao.findByPermissions(Permissions.HOTEL_MANAGER).get(0),
-                    hotelChainDao.findAll().get(i % 5));
+            hotel = new Hotel("hotel" + i, "postcode" + i, "city" + i, "image" + i,
+                    userDao.findByPermissions(Permissions.HOTEL_MANAGER).get(0), hotelChainDao.findAll().get(i % 5));
             hotelDao.save(hotel);
         }
     }
 
     public void createRooms() {
         Room room;
-        List<String> services = new ArrayList<>();
-        services.add("Jacuzzi");
         for (int i = 1; i < 41; i++) {
-            room = new Room(i, RoomType.SINGLE, 10 + i, i, hotelDao.findAll().get(i % 20), services);
+            room = new Room(i, RoomType.SINGLE, 10 + i, i, hotelDao.findAll().get(i % 20), "Jacuzzi");
             roomDao.save(room);
         }
     }
@@ -173,7 +170,8 @@ public class DatabaseSeeder {
         for (int i = 1; i < 6; i++) {
             Date date1 = sdf.parse(dateString + " 0" + i + ":20");
             Date date2 = sdf.parse(dateString + " 1" + i + ":20");
-            reservation = new Reservation("XXX" + i, date1, date2, i % 3, roomDao.findAll().get(i), userDao.findByPermissions(Permissions.BASIC).get(0));
+            reservation = new Reservation("XXX" + i, date1, date2, i % 3, roomDao.findAll().get(i),
+                    userDao.findByPermissions(Permissions.BASIC).get(0));
             reservationDao.save(reservation);
         }
     }
@@ -187,19 +185,24 @@ public class DatabaseSeeder {
             availability = new Availability(roomDao.findAll().get(i), date1, date2);
             availabilityDao.save(availability);
         }
-        
-        availability = new Availability(roomDao.findByHotelName("hotel12").get(0), sdf.parse(dateString + " 04:00"), sdf.parse(dateString + " 20:00"));
+
+        availability = new Availability(roomDao.findByHotelName("hotel12").get(0), sdf.parse(dateString + " 04:00"),
+                sdf.parse(dateString + " 20:00"));
         availabilityDao.save(availability);
-        availability = new Availability(roomDao.findByHotelName("hotel11").get(0), sdf.parse(dateString + " 17:00"), sdf.parse(dateString + " 21:00"));
+        availability = new Availability(roomDao.findByHotelName("hotel11").get(0), sdf.parse(dateString + " 17:00"),
+                sdf.parse(dateString + " 21:00"));
         availabilityDao.save(availability);
-        availability = new Availability(roomDao.findByHotelName("hotel11").get(0), sdf.parse(dateString + " 15:00"), sdf.parse(dateString + " 16:00"));
+        availability = new Availability(roomDao.findByHotelName("hotel11").get(0), sdf.parse(dateString + " 15:00"),
+                sdf.parse(dateString + " 16:00"));
         availabilityDao.save(availability);
-        availability = new Availability(roomDao.findByHotelName("hotel13").get(0), sdf.parse(dateString + " 17:00"), sdf.parse(dateString + " 18:00"));
+        availability = new Availability(roomDao.findByHotelName("hotel13").get(0), sdf.parse(dateString + " 17:00"),
+                sdf.parse(dateString + " 18:00"));
         availabilityDao.save(availability);
-        availability = new Availability(roomDao.findByHotelName("hotel13").get(0), sdf.parse(dateString + " 21:00"), sdf.parse(dateString + " 23:00"));
+        availability = new Availability(roomDao.findByHotelName("hotel13").get(0), sdf.parse(dateString + " 21:00"),
+                sdf.parse(dateString + " 23:00"));
         availabilityDao.save(availability);
     }
-    
+
     public void deleteAllExceptAdmin() {
         availabilityDao.deleteAll();
         reservationDao.deleteAll();

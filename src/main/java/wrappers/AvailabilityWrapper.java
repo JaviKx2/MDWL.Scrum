@@ -1,37 +1,36 @@
 package wrappers;
 
 import java.util.Date;
-import java.util.List;
 
 import entities.core.Availability;
 import entities.core.Room;
 import entities.core.RoomType;
 
 public class AvailabilityWrapper {
-    
+
     private String hotelName;
-    
+
     private String hotelCity;
-    
+
     private String hotelPostalCode;
-    
+
     private int roomNumber;
-    
+
     private int roomCapacity;
-    
+
     private RoomType roomType;
-    
+
     private double roomPrice;
-    
-    private List<String> roomServices;
+
+    private String roomServices;
 
     private Date slotStartDate;
 
     private Date slotEndDate;
-    
+
     public AvailabilityWrapper() {
     }
-    
+
     public AvailabilityWrapper(Availability availability) {
         Room room = availability.getRoom();
         hotelName = room.getHotel().getName();
@@ -74,7 +73,7 @@ public class AvailabilityWrapper {
         return roomPrice;
     }
 
-    public List<String> getRoomServices() {
+    public String getRoomServices() {
         return roomServices;
     }
 

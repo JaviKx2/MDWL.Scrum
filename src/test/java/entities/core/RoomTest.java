@@ -1,10 +1,10 @@
 package entities.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +15,8 @@ public class RoomTest {
 
     @Before
     public void before() throws ParseException {
-        List<String> services = new ArrayList<>();
-        services.add("Jacuzzi");
-        services.add("Internet");
         Hotel hotel = new Hotel("Meliá Princesa", "28008", "Madrid", "Image", null, null);
-        room = new Room(101, RoomType.SINGLE, 15.5, 1, hotel, services);
+        room = new Room(101, RoomType.SINGLE, 15.5, 1, hotel, "Jacuzzi, Internet");
     }
 
     @Test
