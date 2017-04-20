@@ -32,7 +32,7 @@ import wrappers.ReservationWrapper;
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
 public class ReservationResourceFunctionalTesting {
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     @Autowired
     private UserDao userDao;
