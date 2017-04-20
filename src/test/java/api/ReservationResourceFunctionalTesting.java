@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import daos.users.TokenDao;
 import daos.users.UserDao;
 import entities.core.Room;
 import entities.users.User;
+import services.DataService;
 import wrappers.ReservationPostWrapper;
 import wrappers.ReservationWrapper;
 
@@ -39,15 +41,17 @@ public class ReservationResourceFunctionalTesting {
     @Autowired
     private TokenDao tokenDao;
     
+    @Autowired
+    private DataService dataService;
+    
     @Test(expected = HttpClientErrorException.class)
     public void testWithoutHeader() throws ParseException {
         Date entryDate = sdf.parse("31-08-2017 14:20");
         Date departureDate = sdf.parse("31-08-2017 17:20");
         Room room = roomDao.findAll().get(0);
         User user = userDao.findAll().get(2);
-        String tokenValue = tokenDao.findByUser(user).getValue();
         ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
-        ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
+        new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).clazz(ReservationWrapper.class).post().build();
     }
     
@@ -117,6 +121,16 @@ public class ReservationResourceFunctionalTesting {
         ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).header("x-access-token", tokenValue).post().clazz(ReservationWrapper.class).build();
         assertNull(reservation);
+    }
+    
+    /**
+     * Leave database as it was before tests
+     * @throws ParseException
+     */
+    @After
+    public void tearDown() throws ParseException {
+        dataService.deleteAllExceptAdmin();
+        dataService.populate();
     }
 
 }
