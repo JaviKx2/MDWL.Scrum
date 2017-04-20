@@ -2,7 +2,6 @@
 package wrappers;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import entities.core.Reservation;
 
@@ -26,19 +25,6 @@ public class ReservationWrapper {
 
     public ReservationWrapper() {
 
-    }
-
-    public ReservationWrapper(Date entryDate, Date departureDate, int hours, String code, long roomId, long userId, int numberOfPeople,
-            double price) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
-        this.entryDate = sdf.format(entryDate);
-        this.departureDate = sdf.format(departureDate);
-        this.hours = hours;
-        this.code = code;
-        this.roomId = roomId;
-        this.userId = userId;
-        this.numberOfPeople = numberOfPeople;
-        this.price = price;
     }
 
     public ReservationWrapper(Reservation reservation) {

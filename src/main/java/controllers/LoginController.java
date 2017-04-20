@@ -1,15 +1,13 @@
 package controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import wrappers.LoginDataWrapper;
 import daos.users.TokenDao;
 import daos.users.UserDao;
 import entities.users.Token;
 import entities.users.User;
+import wrappers.LoginDataWrapper;
 
 @Controller
 public class LoginController {
