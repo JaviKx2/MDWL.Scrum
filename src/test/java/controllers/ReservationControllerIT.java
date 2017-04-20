@@ -1,11 +1,15 @@
 package controllers;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,7 @@ import daos.core.RoomDao;
 import daos.users.UserDao;
 import entities.core.Room;
 import entities.users.User;
+import services.DataService;
 import wrappers.ReservationPostWrapper;
 import wrappers.ReservationWrapper;
 
@@ -40,6 +45,9 @@ public class ReservationControllerIT {
     private ReservationController reservationController;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    
+    @Autowired
+    private DataService dataService;
 
     @Test
     public void testReservationWithTwoNewAvailabilities() throws ParseException {
@@ -111,6 +119,16 @@ public class ReservationControllerIT {
         assertFalse(availabilityDao.findByRoomAndStartDate(room, sdf.parse("31-08-2017 19:20")).isEmpty());
         assertEquals(sdf.parse("31-08-2017 22:20"),
                 availabilityDao.findByRoomAndStartDate(room, sdf.parse("31-08-2017 19:20")).get(0).getEndingDate());
+    }
+    
+    /**
+     * Leave database as it was before tests
+     * @throws ParseException
+     */
+    @After
+    public void tearDown() throws ParseException {
+        dataService.deleteAllExceptAdmin();
+        dataService.populate();
     }
 
 }

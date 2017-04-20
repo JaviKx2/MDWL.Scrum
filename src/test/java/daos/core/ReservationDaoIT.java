@@ -37,7 +37,7 @@ public class ReservationDaoIT {
         assertEquals(sdf.parse("31-08-2017 01:20"), reservation.getEntryDate());
         assertEquals(sdf.parse("31-08-2017 11:20"), reservation.getDepartureDate());
         assertEquals(10, reservation.getHours());
-        assertEquals("name20", reservation.getUser().getName());
+        assertEquals("basic", reservation.getUser().getName());
         assertEquals("XXX1", reservation.getCode());
         assertEquals(120.0, reservation.getPrice(), 0.01);
     }

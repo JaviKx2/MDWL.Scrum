@@ -28,7 +28,7 @@ public class HotelChainDaoIT {
     public void testOneHotelChain() {
         HotelChain hotelChain = hotelChainDao.findAll().get(0);
         assertEquals("hotelchain0", hotelChain.getName());
-        assertEquals("appmanager", hotelChain.getManager().getName());
+        assertEquals("hotelchainmanager", hotelChain.getManager().getName());
         assertEquals("logo0", hotelChain.getLogo());
     }
 

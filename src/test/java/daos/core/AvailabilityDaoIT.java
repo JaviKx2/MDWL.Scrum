@@ -54,7 +54,7 @@ public class AvailabilityDaoIT {
     }
 
     @Test
-    public void testSearchAllAvailabilitiesBetween16and21() throws ParseException {
+    public void testSearchAllAvailabilitiesBetween16and18() throws ParseException {
         Date slotStartDate = sdf.parse("31-08-2017 16:00");
         Date slotEndDate = sdf.parse("31-08-2017 18:00");
         List<Availability> avaliabilities = availabilityDao.search(null, null, null, slotStartDate, slotEndDate);
@@ -69,34 +69,34 @@ public class AvailabilityDaoIT {
     }
     
     @Test
-    public void testSearchHotel1Availabilities() throws ParseException {
-        String hotelName = "hotel1";
+    public void testSearchHotel12Availabilities() throws ParseException {
+        String hotelName = "hotel12";
         List<Availability> avaliabilities = availabilityDao.search(hotelName, null, null, null, null);
-        assertEquals(3, avaliabilities.size());
+        assertEquals(1, avaliabilities.size());
         
         for (Availability availability : avaliabilities) {
-            assertEquals(hotelName, availability.getRoom().getHotel().getName());
+            assertTrue(availability.getRoom().getHotel().getName().equals(hotelName));
         }
     }
     
     @Test
-    public void testSearchCity2Availabilities() throws ParseException {
-        String cityName = "city2";
+    public void testSearchCity13Availabilities() throws ParseException {
+        String cityName = "city13";
         List<Availability> avaliabilities = availabilityDao.search(null, cityName, null, null, null);
         
         assertEquals(2, avaliabilities.size());
         
         for (Availability availability : avaliabilities) {
-            assertEquals(cityName, availability.getRoom().getHotel().getCity());
+            assertTrue(availability.getRoom().getHotel().getCity().contains(cityName));
         }
     }
     
     @Test
-    public void testSearchPostcode3Availabilities() throws ParseException {
-        String hotelPostcode = "postcode3";
+    public void testSearchPostcode11Availabilities() throws ParseException {
+        String hotelPostcode = "postcode11";
         List<Availability> avaliabilities = availabilityDao.search(null, null, hotelPostcode, null, null);
         
-        assertEquals(3, avaliabilities.size());
+        assertEquals(2, avaliabilities.size());
         
         for (Availability availability : avaliabilities) {
             assertEquals(hotelPostcode, availability.getRoom().getHotel().getPostcode());
@@ -104,22 +104,22 @@ public class AvailabilityDaoIT {
     }
     
     @Test
-    public void testSearchHotel1PostCode1City1AvailabilitiesBetween16and21() throws ParseException {
-        String hotelName = "hotel1";
-        String cityName = "city1";
-        String hotelPostcode = "postcode1";
+    public void testSearchHotel11PostCode11City11AvailabilitiesBetween16and18() throws ParseException {
+        String hotelName = "hotel11";
+        String cityName = "city11";
+        String hotelPostcode = "postcode11";
         Date slotStartDate = sdf.parse("31-08-2017 16:00");
         Date slotEndDate = sdf.parse("31-08-2017 18:00");
         List<Availability> avaliabilities = availabilityDao.search(hotelName, cityName, hotelPostcode, slotStartDate, slotEndDate);
         
-        assertEquals(2, avaliabilities.size());
+        assertEquals(1, avaliabilities.size());
         
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (Availability availability : avaliabilities) {
             Interval availabilityInterval = new Interval(availability.getStartDate().getTime(), availability.getEndingDate().getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
-            assertEquals(hotelName, availability.getRoom().getHotel().getName());
-            assertEquals(cityName, availability.getRoom().getHotel().getCity());
+            assertTrue(availability.getRoom().getHotel().getName().contains(hotelName));
+            assertTrue(availability.getRoom().getHotel().getCity().contains(cityName));
             assertEquals(hotelPostcode, availability.getRoom().getHotel().getPostcode());
         }
     }

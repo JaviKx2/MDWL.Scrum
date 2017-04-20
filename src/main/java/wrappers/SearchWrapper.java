@@ -4,11 +4,15 @@ import java.util.Date;
 
 public class SearchWrapper {
     private String hotelName;
-    private String city; 
+
+    private String city;
+
     private String postCode;
+
     private Date slotStartDate;
+
     private Date slotEndDate;
-    
+
     public SearchWrapper() {
         super();
     }

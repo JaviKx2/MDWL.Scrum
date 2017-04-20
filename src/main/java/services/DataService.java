@@ -17,10 +17,7 @@ import daos.users.UserDao;
 public class DataService {
 
     @Autowired
-    private DatabaseSeeder populate;
-
-    @Autowired
-    private PopulateService populateService;
+    private DatabaseSeeder databaseSeeder;
 
     @Autowired
     private UserDao userDao;
@@ -49,14 +46,14 @@ public class DataService {
         roomDao.deleteAll();
         hotelDao.deleteAll();
         hotelChainDao.deleteAll();
-        //tokenDao.deleteAll();
-        //userDao.deleteAll();
+        tokenDao.deleteAll();
+        userDao.deleteAll();
 
-        populate.createDefaultAdmin();
+        databaseSeeder.createDefaultAdmin();
     }
 
     public void populate() throws ParseException {
-        populateService.populate();
+        databaseSeeder.populate();
     }
 
 }

@@ -28,7 +28,7 @@ public class ReservationWrapper {
     }
 
     public ReservationWrapper(Reservation reservation) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         this.entryDate = sdf.format(reservation.getEntryDate());
         this.departureDate = sdf.format(reservation.getDepartureDate());
         this.hours = reservation.getHours();

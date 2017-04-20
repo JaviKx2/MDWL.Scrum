@@ -22,7 +22,7 @@ public class UserDaoIT {
 
     @Test
     public void testCountUsers() {
-        assertEquals(41, userDao.count());
+        assertEquals(6, userDao.count());
     }
 
     @Test

@@ -32,7 +32,7 @@ public class HotelDaoIT {
         assertEquals("hotel0", hotel.getName());
         assertEquals("postcode0", hotel.getPostcode());
         assertEquals("hotelchain0", hotel.getHotelChain().getName());
-        assertEquals("receptionist", hotel.getManager().getName());
+        assertEquals("hotelmanager", hotel.getManager().getName());
     }
 
 }
