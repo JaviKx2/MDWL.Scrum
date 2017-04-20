@@ -1,6 +1,7 @@
 package wrappers;
 
 import java.util.Date;
+import java.util.List;
 
 import entities.core.Availability;
 import entities.core.Room;
@@ -19,6 +20,8 @@ public class AvailabilityWrapper {
     private RoomType roomType;
     
     private double roomPrice;
+    
+    private List<String> roomServices;
 
     private Date slotStartDate;
 
@@ -35,6 +38,7 @@ public class AvailabilityWrapper {
         roomCapacity = room.getCapacity();
         roomType = room.getType();
         roomPrice = room.getPrice();
+        roomServices = room.getServices();
         slotStartDate = availability.getStartDate();
         slotEndDate = availability.getEndingDate();
     }
@@ -63,11 +67,15 @@ public class AvailabilityWrapper {
         return roomPrice;
     }
 
-    public Date getStartDate() {
+    public List<String> getRoomServices() {
+        return roomServices;
+    }
+
+    public Date getSlotStartDate() {
         return slotStartDate;
     }
 
-    public Date getEndingDate() {
+    public Date getSlotEndDate() {
         return slotEndDate;
     }
 }
