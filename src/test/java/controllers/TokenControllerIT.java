@@ -1,8 +1,7 @@
 package controllers;
 
-import static org.junit.Assert.*;
-
-import java.text.ParseException;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
-import daos.core.AvailabilityDao;
-import daos.core.HotelChainDao;
-import daos.core.HotelDao;
-import daos.core.ReservationDao;
-import daos.core.RoomDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
 import entities.users.Permissions;

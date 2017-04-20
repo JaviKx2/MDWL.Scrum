@@ -1,8 +1,5 @@
 package entities.core;
 
-import java.util.List;
-
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -31,13 +28,12 @@ public class Room {
     @JoinColumn
     private Hotel hotel;
 
-    @ElementCollection
-    private List<String> services;
+    private String services;
 
     public Room() {
     }
 
-    public Room(int number, RoomType type, double price, int capacity, Hotel hotel, List<String> services) {
+    public Room(int number, RoomType type, double price, int capacity, Hotel hotel, String services) {
         this.number = number;
         this.type = type;
         this.price = price;
@@ -94,11 +90,11 @@ public class Room {
         this.hotel = hotel;
     }
 
-    public List<String> getServices() {
+    public String getServices() {
         return services;
     }
 
-    public void setServices(List<String> services) {
+    public void setServices(String services) {
         this.services = services;
     }
 
