@@ -19,6 +19,7 @@ import config.PersistenceConfig;
 import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
 import wrappers.AvailabilityWrapper;
+import wrappers.SearchWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
@@ -33,13 +34,14 @@ public class SearchControllerIT {
     public void testSearchAllAvailabilitiesBetween16and21() throws ParseException {
         Date slotStartDate = sdf.parse("31-08-2017 16:00");
         Date slotEndDate = sdf.parse("31-08-2017 18:00");
-        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(null, null, null, slotStartDate, slotEndDate);
+        SearchWrapper searchWrapper = new SearchWrapper(null, null, null, slotStartDate, slotEndDate);
+        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(searchWrapper);
         
         assertEquals(7, avaliabilityWrappers.size());
         
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (AvailabilityWrapper availabilityWrapper : avaliabilityWrappers) {
-            Interval availabilityInterval = new Interval(availabilityWrapper.getStartDate().getTime(), availabilityWrapper.getEndingDate().getTime());
+            Interval availabilityInterval = new Interval(availabilityWrapper.getSlotStartDate().getTime(), availabilityWrapper.getSlotEndDate().getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
         }
     }
@@ -47,7 +49,8 @@ public class SearchControllerIT {
     @Test
     public void testSearchHotel1Availabilities() throws ParseException {
         String hotelName = "hotel1";
-        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(hotelName, null, null, null, null);
+        SearchWrapper searchWrapper = new SearchWrapper(hotelName, null, null, null, null);
+        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(searchWrapper);
         assertEquals(3, avaliabilityWrappers.size());
         
         for (AvailabilityWrapper availabilityWrapper : avaliabilityWrappers) {
@@ -58,7 +61,8 @@ public class SearchControllerIT {
     @Test
     public void testSearchCity2Availabilities() throws ParseException {
         String cityName = "city2";
-        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(null, cityName, null, null, null);
+        SearchWrapper searchWrapper = new SearchWrapper(null, cityName, null, null, null);
+        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(searchWrapper);
         
         assertEquals(2, avaliabilityWrappers.size());
         
@@ -70,7 +74,8 @@ public class SearchControllerIT {
     @Test
     public void testSearchPostalcode3Availabilities() throws ParseException {
         String hotelPostalcode = "postcode3";
-        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(null, null, hotelPostalcode, null, null);
+        SearchWrapper searchWrapper = new SearchWrapper(null, null, hotelPostalcode, null, null);
+        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(searchWrapper);
         
         assertEquals(3, avaliabilityWrappers.size());
         
@@ -86,13 +91,14 @@ public class SearchControllerIT {
         String hotelPostalcode = "postcode1";
         Date slotStartDate = sdf.parse("31-08-2017 16:00");
         Date slotEndDate = sdf.parse("31-08-2017 18:00");
-        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(hotelName, cityName, hotelPostalcode, slotStartDate, slotEndDate);
+        SearchWrapper searchWrapper = new SearchWrapper(hotelName, cityName, hotelPostalcode, slotStartDate, slotEndDate);
+        List<AvailabilityWrapper> avaliabilityWrappers = searchController.search(searchWrapper);
         
         assertEquals(2, avaliabilityWrappers.size());
         
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (AvailabilityWrapper availabilityWrapper : avaliabilityWrappers) {
-            Interval availabilityInterval = new Interval(availabilityWrapper.getStartDate().getTime(), availabilityWrapper.getEndingDate().getTime());
+            Interval availabilityInterval = new Interval(availabilityWrapper.getSlotStartDate().getTime(), availabilityWrapper.getSlotEndDate().getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
             assertEquals(hotelName, availabilityWrapper.getHotelName());
             assertEquals(cityName, availabilityWrapper.getHotelCity());
