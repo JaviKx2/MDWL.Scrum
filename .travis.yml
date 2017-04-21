@@ -16,4 +16,10 @@ notifications:
       - s.banegas@alumnos.upm.es
       - jorge.martinez.lascorz@alumnos.upm.es
 
-script: mvn verify
+services:
+  - mysql
+  
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS booking;'
+      
+script: mvn verify --settings settings.xml
