@@ -7,7 +7,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading clearfix">
             <div class="panel-title pull-left">
-                Search filters
+                <h4>Search filters</h4>
             </div>
             <div class="clearfix visible-xs"></div>
             <div class="pull-right center">
@@ -21,47 +21,49 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="hotelNameInput">Hotel name</label>
                         <input ng-model="vm.searchValues.hotelName" id="hotelNameInput" placeholder="Hotel Palace" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label for="cityInput">City</label>
                         <input ng-model="vm.searchValues.city" id="cityInput" placeholder="Madrid" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="postalCodeInput">Postal Code</label>
-                        <input ng-model="vm.searchValues.postalCode" id="postalCodeInput" type="number" min="01000" max="52999" placeholder="28014" class="form-control" />
+                        <input ng-model="vm.searchValues.postalCode" id="postalCodeInput" type="text" placeholder="28014" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="row">
-	                    <div class="form-group col-md-4">
-				            <label class="control-label label-reference col-md-1">From</label>
-				            <input type="datetime-local" ng-model='vm.searchValues.slotStartDate' id="slotStartDateInput" class="form-control" />
-				          </div>     
-				          <div class="form-group col-md-4">
-				            <label class="control-label label-reference col-md-1">Until</label>
-				            <input type="datetime-local" ng-model='vm.searchValues.slotEndDate' id="slotEndInput" class="form-control" />
-				          </div>
-                        <button class="btn btn-primary" ng-click="vm.onClickSearchButton()">
-                            <span class="glyphicon glyphicon-search"></span>
-                            Search
-                        </button>                               
-                    </div>  
-                </div>
             </div>
+			<div class="row">
+				<div class="form-group col-md-6">
+					<label class="control-label label-reference col-md-1">From</label>
+					<input type="datetime-local" ng-model='vm.searchValues.slotStartDate' id="slotStartDateInput" class="form-control" />
+				</div>
+				<div class="form-group col-md-6">
+					<label class="control-label label-reference col-md-1">Until</label>
+					<input type="datetime-local" ng-model='vm.searchValues.slotEndDate' id="slotEndInput" class="form-control" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-md-2 col-md-offset-5">
+				     <button class="btn btn-primary btn-lg" ng-click="vm.onClickSearchButton()">
+	                    <span class="glyphicon glyphicon-search"></span>
+	                    Search
+	                </button>
+                </div>
+			</div>
         </div>
     </div>
     <br/>
     <div class="panel panel-primary">
         <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped" ng-show="vm.availableRooms.length > 0">
                 <thead>
                     <tr>
                         <th>Hotel name</th>
@@ -92,18 +94,18 @@
                 </tbody>
             </table>
             <div class="panel" ng-hide="vm.availableRooms.length > 0 || vm.error">
-                <div class="panel-body">
-                    No available rooms found matching this criteria
+                <div class="panel-body text-center">
+                    <strong>No available rooms found matching this criteria</strong>
                 </div>
             </div>
-            <div class="panel" ng-hide="!vm.loading">
-                <div class="panel-body">
-                    Loading...
+            <div class="panel" ng-show="vm.loading">
+                <div class="panel-body text-center">
+                    <strong>Loading...</strong>
                 </div>
             </div>
             <div class="panel" ng-show="vm.error">
-                <div class="panel-body">
-                    Error loading available rooms
+                <div class="panel-body text-center">
+                    <strong>Error loading available rooms</strong>
                 </div>
             </div>
         </div>

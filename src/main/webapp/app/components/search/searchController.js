@@ -5,7 +5,7 @@ booking.controller('SearchController', function($route, SearchService) {
 	
 	vm.searchValues = {};
 	
-	vm.loading = true;
+	vm.loading = false;
 	vm.error = false;
 	
 	vm.availableRooms = [];
@@ -22,6 +22,7 @@ booking.controller('SearchController', function($route, SearchService) {
 	}
 	
 	vm.onClickSearchButton = () => {
+		vm.loading = true;
 		loadAvailableRooms();
 	}
 	
