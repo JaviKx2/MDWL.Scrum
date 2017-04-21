@@ -28,8 +28,8 @@ public class SearchResourceFunctionalTesting {
 
     @Test
     public void testSearchAllAvailabilitiesBetween16and18() throws ParseException {
-        Date slotStartDate = dateFormatAPI.parse("31-08-2017 16:00");
-        Date slotEndDate = dateFormatAPI.parse("31-08-2017 18:00");
+        Date slotStartDate = dateFormatAPI.parse("2017-08-31T16:00:00.000Z");
+        Date slotEndDate = dateFormatAPI.parse("2017-08-31T18:00:00.000Z");
 
         List<AvailabilityWrapper> availableRooms = Arrays.asList(
                 new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH).param("slotStartDate", dateFormatAPI.format(slotStartDate))
@@ -92,8 +92,8 @@ public class SearchResourceFunctionalTesting {
     public void testSearchHotel1City1AvailabilitiesBetween16and18() throws ParseException {
         String hotelName = "hotel1";
         String city = "city1";
-        Date slotStartDate = dateFormatAPI.parse("31-08-2017 16:00");
-        Date slotEndDate = dateFormatAPI.parse("31-08-2017 18:00");
+        Date slotStartDate = dateFormatAPI.parse("2017-08-31T16:00:00.000Z");
+        Date slotEndDate = dateFormatAPI.parse("2017-08-31T18:00:00.000Z");
 
         List<AvailabilityWrapper> availableRooms = Arrays.asList(new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH)
                 .param("hotelName", hotelName).param("city", city).param("slotStartDate", dateFormatAPI.format(slotStartDate))
