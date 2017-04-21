@@ -99,7 +99,7 @@ public class AvailabilityDaoIT {
         assertEquals(2, avaliabilities.size());
         
         for (Availability availability : avaliabilities) {
-            assertEquals(hotelPostcode, availability.getRoom().getHotel().getPostcode());
+            assertTrue(availability.getRoom().getHotel().getPostcode().contains(hotelPostcode));
         }
     }
     
@@ -120,7 +120,7 @@ public class AvailabilityDaoIT {
             assertTrue(searchedInterval.overlaps(availabilityInterval));
             assertTrue(availability.getRoom().getHotel().getName().contains(hotelName));
             assertTrue(availability.getRoom().getHotel().getCity().contains(cityName));
-            assertEquals(hotelPostcode, availability.getRoom().getHotel().getPostcode());
+            assertTrue(availability.getRoom().getHotel().getPostcode().contains(hotelPostcode));
         }
     }
 }
