@@ -93,7 +93,7 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="panel" ng-hide="vm.availableRooms.length > 0 || vm.error">
+            <div class="panel" ng-hide="vm.noSearch || vm.availableRooms.length > 0 || vm.error">
                 <div class="panel-body text-center">
                     <strong>No available rooms found matching this criteria</strong>
                 </div>
