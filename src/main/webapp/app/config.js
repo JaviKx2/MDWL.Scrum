@@ -13,6 +13,11 @@ booking.config(function ($routeProvider) {
 	        controller: "LoginController",
 	        controllerAs: "vm"
 	    })
+	    .when('/search', {
+	        templateUrl: "app/components/search/searchView.html",
+	        controller: "SearchController",
+	        controllerAs: "vm"
+	    })
         .otherwise({
             redirectTo: '/'
         });
