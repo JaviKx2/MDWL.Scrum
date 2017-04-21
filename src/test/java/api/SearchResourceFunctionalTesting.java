@@ -24,16 +24,16 @@ import wrappers.AvailabilityWrapper;
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
 public class SearchResourceFunctionalTesting {
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private SimpleDateFormat dateFormatAPI = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     @Test
     public void testSearchAllAvailabilitiesBetween16and18() throws ParseException {
-        Date slotStartDate = sdf.parse("31-08-2017 16:00");
-        Date slotEndDate = sdf.parse("31-08-2017 18:00");
+        Date slotStartDate = dateFormatAPI.parse("2017-08-31T16:00:00.000Z");
+        Date slotEndDate = dateFormatAPI.parse("2017-08-31T18:00:00.000Z");
 
         List<AvailabilityWrapper> availableRooms = Arrays.asList(
-                new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH).param("slotStartDate", sdf.format(slotStartDate))
-                        .param("slotEndDate", sdf.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
+                new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH).param("slotStartDate", dateFormatAPI.format(slotStartDate))
+                        .param("slotEndDate", dateFormatAPI.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
 
         assertEquals(7, availableRooms.size());
 
@@ -84,7 +84,7 @@ public class SearchResourceFunctionalTesting {
         assertEquals(1, availableRooms.size());
 
         for (AvailabilityWrapper availabilityWrapper : availableRooms) {
-            assertEquals(postalCode, availabilityWrapper.getHotelPostalCode());
+            assertTrue(availabilityWrapper.getHotelPostalCode().contains(postalCode));
         }
     }
 
@@ -92,12 +92,12 @@ public class SearchResourceFunctionalTesting {
     public void testSearchHotel1City1AvailabilitiesBetween16and18() throws ParseException {
         String hotelName = "hotel1";
         String city = "city1";
-        Date slotStartDate = sdf.parse("31-08-2017 16:00");
-        Date slotEndDate = sdf.parse("31-08-2017 18:00");
+        Date slotStartDate = dateFormatAPI.parse("2017-08-31T16:00:00.000Z");
+        Date slotEndDate = dateFormatAPI.parse("2017-08-31T18:00:00.000Z");
 
         List<AvailabilityWrapper> availableRooms = Arrays.asList(new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH)
-                .param("hotelName", hotelName).param("city", city).param("slotStartDate", sdf.format(slotStartDate))
-                .param("slotEndDate", sdf.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
+                .param("hotelName", hotelName).param("city", city).param("slotStartDate", dateFormatAPI.format(slotStartDate))
+                .param("slotEndDate", dateFormatAPI.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
 
         assertEquals(4, availableRooms.size());
 

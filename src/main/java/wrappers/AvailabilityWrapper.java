@@ -2,11 +2,15 @@ package wrappers;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import entities.core.Availability;
 import entities.core.Room;
 import entities.core.RoomType;
 
 public class AvailabilityWrapper {
+    
+    private static final String dateFormat = "dd-MM-yyyy HH:mm";
 
     private String hotelName;
 
@@ -24,8 +28,10 @@ public class AvailabilityWrapper {
 
     private String roomServices;
 
+    @JsonFormat(pattern = dateFormat)
     private Date slotStartDate;
 
+    @JsonFormat(pattern = dateFormat)
     private Date slotEndDate;
 
     public AvailabilityWrapper() {

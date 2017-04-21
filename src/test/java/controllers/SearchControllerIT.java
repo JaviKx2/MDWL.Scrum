@@ -78,7 +78,7 @@ public class SearchControllerIT {
         assertEquals(1, avaliabilityWrappers.size());
 
         for (AvailabilityWrapper availabilityWrapper : avaliabilityWrappers) {
-            assertEquals(hotelPostalcode, availabilityWrapper.getHotelPostalCode());
+            assertTrue(availabilityWrapper.getHotelPostalCode().contains(hotelPostalcode));
         }
     }
 
