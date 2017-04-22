@@ -11,7 +11,7 @@ booking.controller('SearchController', function($route, SearchService) {
 	
 	vm.availableRooms = [];
 	
-	function loadAvailableRooms(){
+	function loadAvailableRooms() {
 		SearchService.getAvailableRooms(vm.searchValues).then(result => {
 			vm.loading = false;
 			vm.availableRooms = result;
@@ -20,7 +20,7 @@ booking.controller('SearchController', function($route, SearchService) {
 			vm.loading = false;
 			vm.error = true;
 		});
-	}
+	};
 	
 	vm.onClickSearchButton = () => {
 		vm.loading = true;
@@ -28,10 +28,14 @@ booking.controller('SearchController', function($route, SearchService) {
 			vm.noSearch = false;
 		}
 		loadAvailableRooms();
-	}
+	};
+	
+	vm.bookRoom = (index) => {
+		SearchService.selectAvailability(vm.availableRooms[index]);
+	};
 	
 	vm.clearFilters = () => {
 		$route.reload();
-	}
+	};
 		
 });

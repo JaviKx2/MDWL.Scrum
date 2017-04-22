@@ -1,5 +1,9 @@
 booking.factory('BookingFactory', function($rootScope, $http, $q){
 	
+	vm = this;
+	vm.availability = {};
+	vm.selectedAvailability = false;
+	
 	var request = config => {
 	      let deferred = $q.defer();
 	      $http(config).then(response => {
@@ -17,7 +21,29 @@ booking.factory('BookingFactory', function($rootScope, $http, $q){
 	      return deferred.promise;	   
 	};
 	
+	var setAvailability = (availability) => {
+		vm.availability = availability;
+		vm.selectedAvailability = true;
+	};
+	
+	var getAvailability = () => {
+		return vm.availability;
+	};
+	
+	var isAvailabilitySelected = () => {
+		return vm.selectedAvailability;
+	};
+	
+	var clearAvailabilty = () => {
+		vm.availability = {};
+		vm.selectedAvailability = false;
+	};
+	
 	return {
-		request: request
+		request: request,
+		setAvailability: setAvailability,
+		getAvailability: getAvailability,
+		isAvailabilitySelected: isAvailabilitySelected,
+		clearAvailabilty: clearAvailabilty
 	};
 });
