@@ -1,0 +1,54 @@
+<section>
+    <div class="page-header">
+        <h1>
+            Available rooms search
+        </h1>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            <div class="panel-title pull-left">
+                <h4>Search filters</h4>
+            </div>
+            <div class="clearfix visible-xs"></div>
+            <div class="pull-right center">
+                <span class="clickable">
+                   <button class="btn btn-warning" ng-click="vm.clearFilters()">
+                       Clear filters
+                       <span class="glyphicon glyphicon-refresh"></span>
+                   </button>
+                </span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5">
+			        <div class="form-group">
+			            <label for="room-select">Rooms:</label> <select
+			                class="form-control" id="room-select"
+			                data-ng-init="vm.listRooms()" data-ng-model="vm.room"
+			                data-ng-options="item.id for item in vm.rooms">
+			            </select>
+			        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">From</label>
+                    <input type="datetime-local" ng-model='vm.slotStartDate' id="slotStartDateInput" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">To</label>
+                    <input type="datetime-local" ng-model='vm.slotEndDate' id="slotEndInput" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2 col-md-offset-5">
+                     <button class="btn btn-primary btn-lg" ng-click="vm.onClickSubmitButton()">
+                        <span class="glyphicon glyphicon-search"></span>
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
