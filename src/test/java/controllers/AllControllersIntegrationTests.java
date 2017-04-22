@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ReservationControllerIT.class, AdminControllerIT.class, TokenControllerIT.class, SearchControllerIT.class})
+@SuiteClasses({ReservationControllerIT.class, AdminControllerIT.class, TokenControllerIT.class, SearchControllerIT.class, AvailabilityControllerIT.class})
 public class AllControllersIntegrationTests {
 
 }
