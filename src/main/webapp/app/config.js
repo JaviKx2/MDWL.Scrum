@@ -1,5 +1,9 @@
 var booking = angular.module("booking", ["ngRoute"]);
 
+booking.config(['$locationProvider', function($locationProvider) {
+	  $locationProvider.hashPrefix('');
+}]);
+
 booking.config(function ($routeProvider) {
     "use strict";
     $routeProvider
