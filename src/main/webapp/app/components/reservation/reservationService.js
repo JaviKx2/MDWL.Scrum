@@ -1,29 +1,10 @@
-booking.service('reservationService', function ($http, $q) {
-   "use strict"; 
-   
-   	const urlBase = "http://localhost:8080/Booking.1.0.0-SNAPSHOT/api/v0";
-   		
-	this.request = config => {
-	      let deferred = $q.defer();
-	      $http(config).then(response => {
-	    	  deferred.resolve(response.data);
-	      }, response => {
-	    	  let errorMsg;
-	    	  if(response.data.error === undefined) {
-	    		  errorMsg="";
-	    	  }else{
-	    		  errorMsg = ` --- ${response.data.error}:${response.data.description}`;
-	    	  }
-	    	  deferred.reject( 
-	    	  	`Error (${response.status}:${response.statusText})${errorMsg}`);
-	      });
-	      return deferred.promise;	   
-	}	
+booking.service('reservationService', function (API_BASE_URL, BookingFactory) {
+   "use strict";
    
 	this.add = reservation => {
 		  let config = {
 		 	 method: 'POST',
-		 	 url: `${urlBase}/reservations`,
+		 	 url: `${API_BASE_URL}/reservations`,
 		 	 data: {
 		 		 entryDate: reservation.entryDate,
 		 		 departureDate: reservation.departureDate,
@@ -32,7 +13,7 @@ booking.service('reservationService', function ($http, $q) {
 		 		 userId: reservation.userId
 		 	 }
 		  };
-	      return this.request(config);
+	      return BookingFactory.request(config);
 	}
 
 });
