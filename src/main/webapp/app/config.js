@@ -27,8 +27,8 @@ booking.config(function ($routeProvider) {
 	    })
 	    .when('/availabilitiesAddition', {
 	    	templateUrl: "app/components/availability/availability.html",
-	        controller: "AvailabilityController",
-	        controllerAs: "vm"
+		    controller: "AvailabilityController",
+		    controllerAs: "vm"
 	    })
         .otherwise({
             redirectTo: '/'
