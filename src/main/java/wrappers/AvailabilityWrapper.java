@@ -17,6 +17,8 @@ public class AvailabilityWrapper {
     private String hotelCity;
 
     private String hotelPostalCode;
+    
+    private long roomId;
 
     private int roomNumber;
 
@@ -42,6 +44,7 @@ public class AvailabilityWrapper {
         hotelName = room.getHotel().getName();
         hotelCity = room.getHotel().getCity();
         hotelPostalCode = room.getHotel().getPostcode();
+        roomId = room.getId();
         roomNumber = room.getNumber();
         roomCapacity = room.getCapacity();
         roomType = room.getType();
@@ -61,6 +64,10 @@ public class AvailabilityWrapper {
 
     public String getHotelPostalCode() {
         return hotelPostalCode;
+    }
+
+    public long getRoomId() {
+        return roomId;
     }
 
     public int getRoomNumber() {
