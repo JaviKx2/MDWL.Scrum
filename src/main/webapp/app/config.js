@@ -25,6 +25,11 @@ booking.config(function ($routeProvider) {
 	        controller: "SearchController",
 	        controllerAs: "vm"
 	    })
+	    .when('/availabilitiesAddition', {
+	    	templateUrl: "app/components/availability/availability.html",
+		    controller: "AvailabilityController",
+		    controllerAs: "vm"
+	    })
         .otherwise({
             redirectTo: '/'
         });
