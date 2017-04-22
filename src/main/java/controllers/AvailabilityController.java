@@ -28,7 +28,7 @@ public class AvailabilityController {
         this.roomDao = roomDao;
     }
     
-    public void add(AvailabilityCreationWrapper availability){
+    public void add(AvailabilityCreationWrapper availability){      
         Room room = roomDao.findOne(availability.getRoomId());
         Date from = availability.getSlotStartDate();
         Date to = availability.getSlotEndDate();
