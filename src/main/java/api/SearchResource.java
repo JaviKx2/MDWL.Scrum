@@ -17,7 +17,7 @@ import wrappers.AvailabilityWrapper;
 @RequestMapping(Uris.VERSION + Uris.SEARCH)
 public class SearchResource {
 
-    private static final String dateFormat = "dd-MM-yyyy HH:mm";
+    private static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
     @Autowired
     private SearchController searchController;

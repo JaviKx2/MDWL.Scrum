@@ -21,7 +21,7 @@ public interface AvailabilityDao extends JpaRepository<Availability, Long> {
     
     @Query("SELECT a FROM Availability a WHERE (:hotelName IS NULL OR a.room.hotel.name LIKE CONCAT('%',:hotelName,'%')) "
             + "AND (:city IS NULL OR a.room.hotel.city LIKE CONCAT('%',:city,'%')) "
-            + "AND (:postCode IS NULL OR a.room.hotel.postcode = :postCode) "
+            + "AND (:postCode IS NULL OR a.room.hotel.postcode LIKE CONCAT('%',:postCode,'%')) "
             + "AND (:slotStartDate IS NULL OR :slotEndDate IS NULL "
                     + "OR (a.endingDate >= :slotEndDate AND a.startDate < :slotEndDate) "
                     + "OR (a.endingDate < :slotEndDate AND a.endingDate > :slotStartDate))")
