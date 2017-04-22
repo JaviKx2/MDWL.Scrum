@@ -4,6 +4,10 @@ booking.controller('AvailabilityController', function($route, AvailabilityServic
 	var vm = this;
 	
 	vm.availability = {};
+	vm.room = {}
+	vm.rooms = [];
+	vm.slotStartDate = {};
+	vm.slotEndDate = {};
 	vm.loading = false;
 	vm.error = false;
 	
