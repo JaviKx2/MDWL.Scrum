@@ -45,7 +45,7 @@ public class RoomResourceFunctionalTesting {
     }
     
     @Test
-    public void testFindAll() throws ParseException{
+    public void testFindAll() {
         User user = userDao.findAll().get(HOTEL_MANAGER);
         String tokenValue = tokenDao.findByUser(user).getValue();
         List<Room> response = Arrays.asList(
