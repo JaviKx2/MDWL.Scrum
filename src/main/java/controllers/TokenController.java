@@ -22,7 +22,7 @@ public class TokenController {
     
     public boolean userHasPermission(String tokenValue, Permissions p) {
         Token tkn = tokenDao.findByValue(tokenValue);
-        if (tkn != null && tkn.getUser().getPermissions() == p){
+        if (tkn != null && tkn.getUser().getPermissions().ordinal() >= p.ordinal()){
             return true;
         } 
         else {

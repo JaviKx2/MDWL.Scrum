@@ -68,19 +68,6 @@ public class ReservationResourceFunctionalTesting {
                 .body(reservationWrapper).header("x-access-token", "BAD TOKEN").clazz(ReservationWrapper.class).post().build();
         assertNull(reservation);
     }
-    
-    @Test
-    public void testBadPermission() throws ParseException {
-        Date entryDate = sdf.parse("31-08-2017 14:20");
-        Date departureDate = sdf.parse("31-08-2017 17:20");
-        Room room = roomDao.findAll().get(0);
-        User user = userDao.findAll().get(3);
-        String tokenValue = tokenDao.findByUser(user).getValue();
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
-        ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
-                .body(reservationWrapper).header("x-access-token", tokenValue).clazz(ReservationWrapper.class).post().build();
-        assertNull(reservation);
-    }
    
     @Test
     public void testAddReservation() throws ParseException {
