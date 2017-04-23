@@ -29,7 +29,7 @@ public class UserDaoIT {
     public void testOneUser() {
         User user = userDao.findAll().get(1);
         assertEquals("appmanager@gmail.com", user.getEmail());
-        assertEquals("appmanager", user.getPassword());
+        assertTrue(user.checkPassword("appmanager"));
         assertEquals("appmanager", user.getName());
         assertEquals("appmanager surname", user.getSurname());
         assertEquals(Permissions.APP_MANAGER, user.getPermissions());

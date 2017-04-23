@@ -22,7 +22,7 @@ public class UserTest {
     @Test
     public void testUserCreation() {
         assertEquals("mdw@upm.es", user.getEmail());
-        assertEquals("12341234", user.getPassword());
+        assertTrue(user.checkPassword("12341234"));
         assertEquals("Rodrigo", user.getName());
         assertEquals("García", user.getSurname());
         assertEquals(Permissions.BASIC, user.getPermissions());
