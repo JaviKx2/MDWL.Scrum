@@ -29,7 +29,6 @@ import entities.core.Room;
 import entities.users.User;
 import services.DatabaseSeeder;
 import wrappers.HotelWrapper;
-import wrappers.ReservationPostWrapper;
 import wrappers.ReservationWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
