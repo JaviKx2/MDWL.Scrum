@@ -1,5 +1,7 @@
 package api;
 
+import static config.Constants.DATE_FORMAT;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,16 +19,14 @@ import wrappers.AvailabilityWrapper;
 @RequestMapping(Uris.VERSION + Uris.SEARCH)
 public class SearchResource {
 
-    private static final String dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-
     @Autowired
     private SearchController searchController;
 
     @RequestMapping(method = RequestMethod.GET)
     public List<AvailabilityWrapper> search(@RequestParam(required = false) String hotelName, @RequestParam(required = false) String city,
             @RequestParam(required = false) String postalCode,
-            @RequestParam(required = false) @DateTimeFormat(pattern = dateFormat) Date slotStartDate,
-            @RequestParam(required = false) @DateTimeFormat(pattern = dateFormat) Date slotEndDate) {
+            @RequestParam(required = false) @DateTimeFormat(pattern = DATE_FORMAT) Date slotStartDate,
+            @RequestParam(required = false) @DateTimeFormat(pattern = DATE_FORMAT) Date slotEndDate) {
         return searchController.search(hotelName, city, postalCode, slotStartDate, slotEndDate);
     }
 }

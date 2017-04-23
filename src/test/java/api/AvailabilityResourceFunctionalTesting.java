@@ -1,5 +1,7 @@
 package api;
 
+import static config.Constants.DATE_FORMAT;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +25,7 @@ import wrappers.AvailabilityCreationWrapper;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
 public class AvailabilityResourceFunctionalTesting {
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
     
     private final static int HOTEL_MANAGER = 3;
 

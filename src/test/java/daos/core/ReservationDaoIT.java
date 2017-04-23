@@ -1,6 +1,7 @@
 package daos.core;
 
-import static org.junit.Assert.*;
+import static config.Constants.DATE_FORMAT;
+import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ public class ReservationDaoIT {
     @Autowired
     private ReservationDao reservationDao;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
     @Test
     public void testCountReservation() {

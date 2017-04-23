@@ -1,5 +1,6 @@
 package api;
 
+import static config.Constants.DATE_FORMAT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -32,7 +33,7 @@ import wrappers.ReservationWrapper;
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
 public class ReservationResourceFunctionalTesting {
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
     @Autowired
     private UserDao userDao;

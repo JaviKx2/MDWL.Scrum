@@ -1,5 +1,6 @@
 package controllers;
 
+import static config.Constants.DATE_FORMAT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -44,8 +45,8 @@ public class ReservationControllerIT {
     @Autowired
     private ReservationController reservationController;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    
+    private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+
     @Autowired
     private DatabaseSeeder databaseSeeder;
 
@@ -120,9 +121,10 @@ public class ReservationControllerIT {
         assertEquals(sdf.parse("31-08-2017 22:20"),
                 availabilityDao.findByRoomAndStartDate(room, sdf.parse("31-08-2017 19:20")).get(0).getEndingDate());
     }
-    
+
     /**
      * Leave database as it was before tests
+     * 
      * @throws ParseException
      */
     @After

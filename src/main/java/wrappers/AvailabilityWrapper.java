@@ -1,16 +1,17 @@
 package wrappers;
 
+import static config.Constants.DATE_FORMAT;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import entities.core.Availability;
 import entities.core.Room;
 import entities.core.RoomType;
 
 public class AvailabilityWrapper {
-    
-    private static final String dateFormat = "dd-MM-yyyy HH:mm";
 
     private String hotelName;
 
@@ -29,17 +30,16 @@ public class AvailabilityWrapper {
     private double roomPrice;
 
     private String roomServices;
+    
+    private String slotStartDate;
 
-    @JsonFormat(pattern = dateFormat)
-    private Date slotStartDate;
-
-    @JsonFormat(pattern = dateFormat)
-    private Date slotEndDate;
+    private String slotEndDate;
 
     public AvailabilityWrapper() {
     }
 
     public AvailabilityWrapper(Availability availability) {
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         Room room = availability.getRoom();
         hotelName = room.getHotel().getName();
         hotelCity = room.getHotel().getCity();
@@ -50,8 +50,8 @@ public class AvailabilityWrapper {
         roomType = room.getType();
         roomPrice = room.getPrice();
         roomServices = room.getServices();
-        slotStartDate = availability.getStartDate();
-        slotEndDate = availability.getEndingDate();
+        slotStartDate = sdf.format(availability.getStartDate());
+        slotEndDate = sdf.format(availability.getEndingDate());
     }
 
     public String getHotelName() {
@@ -90,11 +90,11 @@ public class AvailabilityWrapper {
         return roomServices;
     }
 
-    public Date getSlotStartDate() {
+    public String getSlotStartDate() {
         return slotStartDate;
     }
 
-    public Date getSlotEndDate() {
+    public String getSlotEndDate() {
         return slotEndDate;
     }
 }
