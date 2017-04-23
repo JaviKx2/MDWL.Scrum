@@ -1,8 +1,10 @@
-booking.factory('BookingFactory', function($rootScope, $http, $q){
+booking.factory('BookingFactory', function($rootScope, $http, $q, $window){
 	
 	vm = this;
 	vm.availability = {};
 	vm.selectedAvailability = false;
+	vm.loggedIn = false;
+	vm.redirectAfterLogin = '';
 	
 	var request = config => {
 	      let deferred = $q.defer();
@@ -39,11 +41,38 @@ booking.factory('BookingFactory', function($rootScope, $http, $q){
 		vm.selectedAvailability = false;
 	};
 	
+	var saveToken = (token) => {
+		$window.localStorage['spring-token'] = token;
+        $http.defaults.headers.common['x-access-token'] = token;
+    	vm.loggedIn = true;
+	};
+	
+	var isLoggedIn = () => {
+		return vm.loggedIn;
+	};
+	
+	var setRedirectAfterLogin = (redirectPath) => {
+		vm.redirectAfterLogin = redirectPath;
+	};
+	
+	var getRedirectAfterLogin = () => {
+		return vm.redirectAfterLogin;
+	};
+	
+	var clearRedirectAfterLogin = () => {
+		vm.redirectAfterLogin = '';
+	};
+	
 	return {
 		request: request,
 		setAvailability: setAvailability,
 		getAvailability: getAvailability,
 		isAvailabilitySelected: isAvailabilitySelected,
-		clearAvailabilty: clearAvailabilty
+		clearAvailabilty: clearAvailabilty,
+		saveToken: saveToken,
+		isLoggedIn: isLoggedIn,
+		setRedirectAfterLogin: setRedirectAfterLogin,
+		getRedirectAfterLogin: getRedirectAfterLogin,
+		clearRedirectAfterLogin: clearRedirectAfterLogin
 	};
 });

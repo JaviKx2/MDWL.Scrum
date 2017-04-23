@@ -1,4 +1,4 @@
-booking.controller('SearchController', function($route, SearchService) {
+booking.controller('SearchController', function($location, $route, SearchService, BookingFactory) {
 	"use strict";
 	
 	var vm = this;
@@ -31,7 +31,8 @@ booking.controller('SearchController', function($route, SearchService) {
 	};
 	
 	vm.bookRoom = (index) => {
-		SearchService.selectAvailability(vm.availableRooms[index]);
+		BookingFactory.setAvailability(vm.availableRooms[index]);
+		$location.path("/newreservation");
 	};
 	
 	vm.clearFilters = () => {

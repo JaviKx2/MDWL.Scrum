@@ -1,4 +1,4 @@
-booking.controller('LoginController', function($http, $window, loginService) {
+booking.controller('LoginController', function($location, loginService, BookingFactory) {
 	"use strict";
 	
 	var vm = this;
@@ -10,12 +10,16 @@ booking.controller('LoginController', function($http, $window, loginService) {
 	vm.login = () => {
 		loginService.login(vm.loginData).then(result => {
 			if (result.token){
-				console.log("token: " + result.token);
-				$window.localStorage['spring-token'] = result.token;
-		        $http.defaults.headers.common['x-access-token'] = result.token;
 				vm.error = false;
+				BookingFactory.saveToken(result.token);
+				var redirectAfterLogin = BookingFactory.getRedirectAfterLogin();
+				if (redirectAfterLogin !== '') {
+					BookingFactory.clearRedirectAfterLogin()
+					$location.path(redirectAfterLogin);
+				} else {
+					$location.path("/search");
+				}
 			} else {
-				console.log("ERROR");
 				vm.error = true;
 			}
 		}, errors => {	

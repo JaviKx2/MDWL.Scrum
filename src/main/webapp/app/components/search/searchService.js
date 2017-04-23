@@ -1,4 +1,4 @@
-booking.service('SearchService', function ($location, API_BASE_URL, BookingFactory) {
+booking.service('SearchService', function (API_BASE_URL, BookingFactory) {
    "use strict"; 
 	
 	this.getAvailableRooms = (searchValues) => {
@@ -8,11 +8,6 @@ booking.service('SearchService', function ($location, API_BASE_URL, BookingFacto
 		 	 url: `${API_BASE_URL}/search`
 		  };
 	      return BookingFactory.request(config);
-	};
-	
-	this.selectAvailability = (availability) => {
-		BookingFactory.setAvailability(availability);
-		$location.path("/newreservation");
 	};
 
 });

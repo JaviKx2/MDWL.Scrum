@@ -1,7 +1,7 @@
 booking.service('loginService', function (API_BASE_URL, BookingFactory) {
    "use strict";
    
-	this.login = loginData => {
+	this.login = (loginData) => {
 		  let config = {
 		 	 method: 'POST',
 		 	 url: `${API_BASE_URL}/login`,
@@ -11,6 +11,6 @@ booking.service('loginService', function (API_BASE_URL, BookingFactory) {
 		 	 }
 		  };
 	      return BookingFactory.request(config);
-	}
+	};
 
 });
