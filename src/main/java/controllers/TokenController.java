@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import daos.users.TokenDao;
 import entities.users.Permissions;
 import entities.users.Token;
+import entities.users.User;
 
 @Controller
 @Transactional
@@ -18,6 +19,15 @@ public class TokenController {
     @Autowired
     public void setTokenDao(TokenDao tokenDao) {
         this.tokenDao = tokenDao;
+    }
+    
+    public User getUserByTokenValue(String tokenValue) {
+        User user = null;
+        Token tkn = tokenDao.findByValue(tokenValue);
+        if (tkn != null) {
+            user = tkn.getUser();
+        }
+        return user;
     }
     
     public boolean userHasPermission(String tokenValue, Permissions p) {
