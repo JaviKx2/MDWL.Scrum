@@ -9,8 +9,7 @@ booking.service('reservationService', function (API_BASE_URL, BookingFactory) {
 		 		 entryDate: reservation.entryDate,
 		 		 departureDate: reservation.departureDate,
 		 		 numberOfPeople: reservation.numberOfPeople,
-		 		 roomId: reservation.roomId,
-		 		 userId: reservation.userId
+		 		 roomId: reservation.roomId
 		 	 }
 		  };
 	      return BookingFactory.request(config);
