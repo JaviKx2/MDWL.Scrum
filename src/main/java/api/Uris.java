@@ -19,4 +19,11 @@ public class Uris {
     public static final String AVAILABILITIES = "/availabilities";
     
     public static final String ROOMS = "/rooms";
+    
+    public static final String HOTEL = "/hotel";
+    
+    public static final String HOTEL_CHAIN = "/hotel_chain";
+
+    
+    public static final String USER = "/user";
 }

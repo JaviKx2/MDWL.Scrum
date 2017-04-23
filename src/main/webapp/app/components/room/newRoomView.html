@@ -1,0 +1,72 @@
+<section>
+    <div class="page-header">
+        <h1>
+            Add new room
+        </h1>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+            <div class="panel-title pull-left">
+                <h4>Add new room form</h4>
+            </div>
+        </div>
+        <div class="panel-body">
+             <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="room-select">Hotel:</label> <select
+                            class="form-control" id="room-select"
+                            data-ng-init="vm.listHotels(); vm.hotel = vm.hotels[0]" data-ng-model="vm.hotel"
+                            data-ng-options="item.name for item in vm.hotels">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="room-select">Room Type:</label> 
+                        <select
+                            class="form-control" id="room-select" data-ng-model="vm.roomType"
+                            data-ng-options="o as o for o in vm.types">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">Number:</label>
+                    <input type="text" ng-model='vm.number' id="slotStartDateInput" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">Capacity:</label>
+                    <input type="text" ng-model='vm.capacity' id="slotStartDateInput" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">Price:</label>
+                    <input type="text" ng-model='vm.price' id="slotStartDateInput" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">Services:</label>
+                    <input type="text" ng-model='vm.services' id="slotStartDateInput" class="form-control" />
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="form-group col-md-2 col-md-offset-5">
+                     <button class="btn btn-primary btn-lg" ng-click="vm.onClickSubmitButton()">
+                        <span class="glyphicon glyphicon-search"></span>
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

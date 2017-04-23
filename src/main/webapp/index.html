@@ -26,7 +26,13 @@
     <script src="app/components/search/searchController.js"></script>
 
     <script src="app/components/room/roomService.js"></script>
-
+    <script src="app/components/room/roomController.js"></script>
+    
+    <script src="app/components/hotel/hotelService.js"></script>
+    <script src="app/components/hotel/hotelChainService.js"></script>
+    <script src="app/components/hotel/hotelController.js"></script>
+    
+    
     <script src="app/components/availability/availabilityService.js"></script>
     <script src="app/components/availability/availabilityController.js"></script>
 
@@ -58,9 +64,16 @@
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#/hotels">Hotels
 	        <span class="caret"></span></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="#/hotels/add">Add a new hotel</a></li>
+	          <li><a href="#/newhotel">Add a new hotel</a></li>
 	        </ul>
       	</li>
+      	        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#/hotels">Rooms
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#/newroom">Add a new room</a></li>
+            </ul>
+        </li>
         <li class="dropdown">
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#/hotelchains">Hotel Chains
 	        <span class="caret"></span></a>

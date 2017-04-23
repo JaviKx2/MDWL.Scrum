@@ -1,0 +1,41 @@
+package api;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import controllers.AvailabilityController;
+import controllers.HotelChainController;
+import controllers.HotelController;
+import controllers.TokenController;
+import controllers.UserController;
+import entities.core.HotelChain;
+import entities.core.Room;
+import entities.users.Permissions;
+import entities.users.User;
+import wrappers.AvailabilityCreationWrapper;
+import wrappers.HotelWrapper;
+
+@RestController
+@RequestMapping(Uris.VERSION + Uris.HOTEL_CHAIN)
+public class HotelChainResource {
+
+    @Autowired
+    private HotelChainController hotelChainController;
+    
+    @Autowired
+    private TokenController tokenController;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<HotelChain> findAll(@RequestHeader("x-access-token") String token) {
+        if (tokenController.userHasPermission(token, Permissions.APP_MANAGER)){
+            return hotelChainController.findAll();
+        }
+        return null;
+    }
+}

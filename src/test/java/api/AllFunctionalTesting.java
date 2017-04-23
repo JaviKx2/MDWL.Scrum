@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ReservationResourceFunctionalTesting.class, LoginResourceFunctionalTesting.class, SearchResourceFunctionalTesting.class, AvailabilityResourceFunctionalTesting.class, RoomResourceFunctionalTesting.class})
+@SuiteClasses({ReservationResourceFunctionalTesting.class, LoginResourceFunctionalTesting.class, SearchResourceFunctionalTesting.class, AvailabilityResourceFunctionalTesting.class, RoomResourceFunctionalTesting.class, HotelChainResourceFunctionalTesting.class})
 public class AllFunctionalTesting {
 
 }
