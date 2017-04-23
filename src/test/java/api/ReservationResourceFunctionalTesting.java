@@ -26,7 +26,7 @@ import daos.users.UserDao;
 import entities.core.Room;
 import entities.users.User;
 import services.DatabaseSeeder;
-import wrappers.ReservationPostWrapper;
+import wrappers.ReservationCreationWrapper;
 import wrappers.ReservationWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,8 +52,7 @@ public class ReservationResourceFunctionalTesting {
         Date entryDate = sdf.parse("31-08-2017 14:20");
         Date departureDate = sdf.parse("31-08-2017 17:20");
         Room room = roomDao.findAll().get(0);
-        User user = userDao.findAll().get(2);
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(entryDate, departureDate, room.getId(), 1);
         new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).clazz(ReservationWrapper.class).post().build();
     }
@@ -63,8 +62,7 @@ public class ReservationResourceFunctionalTesting {
         Date entryDate = sdf.parse("31-08-2017 14:20");
         Date departureDate = sdf.parse("31-08-2017 17:20");
         Room room = roomDao.findAll().get(0);
-        User user = userDao.findAll().get(2);
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(entryDate, departureDate, room.getId(), 1);
         ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).header("x-access-token", "BAD TOKEN").clazz(ReservationWrapper.class).post().build();
         assertNull(reservation);
@@ -77,7 +75,7 @@ public class ReservationResourceFunctionalTesting {
         Room room = roomDao.findAll().get(0);
         User user = userDao.findAll().get(2);
         String tokenValue = tokenDao.findByUser(user).getValue();
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(entryDate, departureDate, room.getId(), 1);
         ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).header("x-access-token", tokenValue).clazz(ReservationWrapper.class).post().build();
         assertEquals(sdf.format(sdf.parse("31-08-2017 14:20")), reservation.getEntryDate());
@@ -94,7 +92,7 @@ public class ReservationResourceFunctionalTesting {
         Date departureDate = sdf.parse("31-08-2017 14:20");
         User user = userDao.findAll().get(2);
         String tokenValue = tokenDao.findByUser(user).getValue();
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, 0, user.getId(), 1);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(entryDate, departureDate, 0, 1);
         ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).header("x-access-token", tokenValue).clazz(ReservationWrapper.class).post().build();
         assertNull(reservation);
@@ -107,7 +105,7 @@ public class ReservationResourceFunctionalTesting {
         Room room = roomDao.findAll().get(0);
         User user = userDao.findAll().get(2);
         String tokenValue = tokenDao.findByUser(user).getValue();
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(entryDate, departureDate, room.getId(), user.getId(), 1);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(entryDate, departureDate, room.getId(), 1);
         ReservationWrapper reservation = new RestBuilder<ReservationWrapper>(RestService.URL).path(Uris.RESERVATIONS)
                 .body(reservationWrapper).header("x-access-token", tokenValue).post().clazz(ReservationWrapper.class).build();
         assertNull(reservation);

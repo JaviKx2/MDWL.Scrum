@@ -45,7 +45,7 @@ booking.controller('NewReservationController', function($route, $location, reser
 		return BookingFactory.formatToMinMaxDatetime(vm.availabilitySelected.slotEndDate);
 	};
 	
-	vm.reload = () => {
-		$route.reload();
+	vm.clickOnOk = () => {
+		$location.path("/search");
 	}
 });

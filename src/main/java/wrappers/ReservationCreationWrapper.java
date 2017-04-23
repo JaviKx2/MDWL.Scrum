@@ -3,7 +3,7 @@ package wrappers;
 
 import java.util.Date;
 
-public class ReservationPostWrapper {
+public class ReservationCreationWrapper {
 
     private Date entryDate;
 
@@ -11,19 +11,16 @@ public class ReservationPostWrapper {
 
     private long roomId;
 
-    private int userId;
-
     private int numberOfPeople;
 
-    public ReservationPostWrapper() {
+    public ReservationCreationWrapper() {
 
     }
 
-    public ReservationPostWrapper(Date entryDate, Date departureDate, long roomId, int userId, int numberOfPeople) {
+    public ReservationCreationWrapper(Date entryDate, Date departureDate, long roomId, int numberOfPeople) {
         this.entryDate = entryDate;
         this.departureDate = departureDate;
         this.roomId = roomId;
-        this.userId = userId;
         this.numberOfPeople = numberOfPeople;
     }
 
@@ -51,14 +48,6 @@ public class ReservationPostWrapper {
         this.roomId = roomId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public int getNumberOfPeople() {
         return numberOfPeople;
     }
@@ -69,8 +58,8 @@ public class ReservationPostWrapper {
 
     @Override
     public String toString() {
-        return "ReservationPostWrapper [entryDate=" + entryDate + ", departureDate=" + departureDate + ", roomId=" + roomId + ", userId="
-                + userId + ", numberOfPeople=" + numberOfPeople + "]";
+        return "ReservationPostWrapper [entryDate=" + entryDate + ", departureDate=" + departureDate + ", roomId=" + roomId
+                + ", numberOfPeople=" + numberOfPeople + "]";
     }
 
     @Override
@@ -81,7 +70,6 @@ public class ReservationPostWrapper {
         result = prime * result + ((entryDate == null) ? 0 : entryDate.hashCode());
         result = prime * result + numberOfPeople;
         result = prime * result + (int) (roomId ^ (roomId >>> 32));
-        result = prime * result + userId;
         return result;
     }
 
@@ -93,7 +81,7 @@ public class ReservationPostWrapper {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ReservationPostWrapper other = (ReservationPostWrapper) obj;
+        ReservationCreationWrapper other = (ReservationCreationWrapper) obj;
         if (departureDate == null) {
             if (other.departureDate != null)
                 return false;
@@ -107,8 +95,6 @@ public class ReservationPostWrapper {
         if (numberOfPeople != other.numberOfPeople)
             return false;
         if (roomId != other.roomId)
-            return false;
-        if (userId != other.userId)
             return false;
         return true;
     }

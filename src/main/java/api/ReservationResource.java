@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import controllers.ReservationController;
 import controllers.TokenController;
 import entities.users.Permissions;
-import wrappers.ReservationPostWrapper;
+import entities.users.User;
+import wrappers.ReservationCreationWrapper;
 import wrappers.ReservationWrapper;
 
 @RestController
@@ -24,9 +25,10 @@ public class ReservationResource {
     private TokenController tokenController;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ReservationWrapper add(@RequestBody ReservationPostWrapper reservationPostWrapper, @RequestHeader("x-access-token") String token) {
+    public ReservationWrapper add(@RequestBody ReservationCreationWrapper reservationCreationWrapper, @RequestHeader("x-access-token") String token) {
         if (tokenController.userHasPermission(token, Permissions.BASIC)){
-            return reservationController.add(reservationPostWrapper);
+            User user = tokenController.getUserByTokenValue(token);
+            return reservationController.add(reservationCreationWrapper, user);
         } else {
             return null;
         }
