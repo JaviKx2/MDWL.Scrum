@@ -52,10 +52,10 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-md-2 col-md-offset-5">
-				     <button class="btn btn-primary btn-lg" ng-click="vm.onClickSearchButton()">
-	                    <span class="glyphicon glyphicon-search"></span>
-	                    Search
-	                </button>
+					<button class="btn btn-primary btn-lg" ng-click="vm.onClickSearchButton()">
+						<span class="glyphicon glyphicon-search"></span>
+						Search
+					</button>
                 </div>
 			</div>
         </div>
@@ -69,13 +69,11 @@
                         <th>Hotel name</th>
                         <th>City</th>
                         <th>Postal code</th>
-                        <th>Room number</th>
-                        <th>Room type</th>
                         <th>Room capacity</th>
-                        <th>Services</th>
                         <th>Price</th>
                         <th>Available from</th>
                         <th>Available until</th>
+                        <th>Book room</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,13 +81,16 @@
                         <td>{{availableRoom.hotelName}}</td>
                         <td>{{availableRoom.hotelCity}}</td>
                         <td>{{availableRoom.hotelPostalCode}}</td>
-                        <td>{{availableRoom.roomNumber}}</td>
-                        <td>{{availableRoom.roomType}}</td>
                         <td>{{availableRoom.roomCapacity}}</td>
-                        <td>{{availableRoom.roomServices}}</td>
                         <td>{{availableRoom.roomPrice}} &euro;/hour</td>
                         <td>{{availableRoom.slotStartDate}}</td>
                         <td>{{availableRoom.slotEndDate}}</td>
+                        <td>
+	                        <button class="btn btn-primary" ng-click="vm.bookRoom($index)">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                        Book room
+	                        </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

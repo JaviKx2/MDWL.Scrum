@@ -1,41 +1,77 @@
 <section>
     <div class="page-header">
-      <h2>New reservation</h2>
+		<h2>New reservation</h2>
     </div>
-    <div class="container col-md-offset-3" ng-hide="vm.reservationData || vm.loading">
+    <div class="container">
+	    <div class="row">
+	        <div class="col-md-4 text-right"><strong>Hotel:</strong></div>
+	        <div class="col-md-6">{{vm.availabilitySelected.hotelName}}</div>
+	    </div>
+	    <div class="row">
+            <div class="col-md-4 text-right"><strong>City:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.hotelCity}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Postal code:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.hotelPostalCode}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Room:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.roomNumber}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Room capacity:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.roomCapacity}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Room type:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.roomType}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Room services:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.roomServices}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Price:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.roomPrice}}&euro;/hour</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Available from:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.slotStartDate}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 text-right"><strong>Available until:</strong></div>
+            <div class="col-md-6">{{vm.availabilitySelected.slotEndDate}}</div>
+        </div>
+    </div>
+    <div class="container" ng-hide="vm.reservationData || vm.loading">
        <form class="form-horizontal" role="form" name="formArticle" ng-submit="vm.submitReservation()">  
           <div class="form-group">
-            <label class="control-label label-reference col-md-1">Entry date</label>
+            <label class="control-label label-reference text-right col-md-4">Entry date</label>
             <div class="col-md-4">
-                <input type="datetime-local" ng-model='vm.newReservation.entryDate' required>
+                <input type="datetime-local" class="form-control" ng-model='vm.newReservation.entryDate' required>
             </div>
           </div>     
           <div class="form-group">
-            <label class="control-label label-reference col-md-1">Departure date</label>
+            <label class="control-label label-reference text-right col-md-4">Departure date</label>
             <div class="col-md-4">
-                <input type="datetime-local" ng-model='vm.newReservation.departureDate' required>
+                <input type="datetime-local" class="form-control" ng-model='vm.newReservation.departureDate' required>
             </div>
           </div>        
           <div class="form-group">
-            <label class="control-label label-price col-md-1">Number of people</label>
+            <label class="control-label label-price text-right col-md-4">Number of people</label>
              <div class="col-md-4">
-                <input type="number" step="1" class="form-control" name="numberOfPeople" placeholder="Number of people" ng-model='vm.newReservation.numberOfPeople' required>
+                <input type="number" step="1" min="1" max="{{vm.availabilitySelected.roomCapacity}}" class="form-control" name="numberOfPeople" placeholder="Number of people" ng-model='vm.newReservation.numberOfPeople' required>
             </div>
-          </div>   
+          </div>
           <div class="form-group">
-            <label class="control-label label-price col-md-1">Room id</label>
-             <div class="col-md-4">
-                <input type="number" step="1" class="form-control" name="roomId" placeholder="Room id" ng-model='vm.newReservation.roomId' required>
-            </div>
-          </div>  
-          <div class="form-group">
-            <label class="control-label label-price col-md-1">User id</label>
+            <label class="control-label label-price text-right col-md-4">User id</label>
              <div class="col-md-4">
                 <input type="number" step="1" class="form-control" name="userId" placeholder="User id" ng-model='vm.newReservation.userId' required>
             </div>
           </div>    
           <div class="form-group"> 
-             <div class="col-md-offset-2 col-md-10">
+             <div class="col-md-offset-4 col-md-8">
                <input type="submit" class="btn btn-primary" value="Book"> 
              </div>
           </div>               

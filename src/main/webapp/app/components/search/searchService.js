@@ -8,6 +8,6 @@ booking.service('SearchService', function (API_BASE_URL, BookingFactory) {
 		 	 url: `${API_BASE_URL}/search`
 		  };
 	      return BookingFactory.request(config);
-	}
+	};
 
 });
