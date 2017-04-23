@@ -27,7 +27,7 @@ public class User {
 
     public User(String email, String password, String name, String surname, Permissions permissions) {
         this.email = email;
-        this.password = password;
+        this.setPassword(password);
         this.name = name;
         this.surname = surname;
         this.permissions = permissions;
@@ -66,7 +66,11 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = new Encrypting(Encrypting.SHA512).encryptInString(password);
+    }
+    
+    public boolean checkPassword(String passwordToCheck) {
+        return password.equals(new Encrypting(Encrypting.SHA512).encryptInString(passwordToCheck));
     }
 
     public void setName(String name) {

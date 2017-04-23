@@ -167,11 +167,11 @@ public class DatabaseSeeder {
     public void createReservations() throws ParseException {
         Reservation reservation;
         String dateString = "31-08-2017";
+        User user = userDao.findByPermissions(Permissions.BASIC).get(0);
         for (int i = 1; i < 6; i++) {
             Date date1 = sdf.parse(dateString + " 0" + i + ":20");
             Date date2 = sdf.parse(dateString + " 1" + i + ":20");
-            reservation = new Reservation("XXX" + i, date1, date2, i % 3, roomDao.findAll().get(i),
-                    userDao.findByPermissions(Permissions.BASIC).get(0));
+            reservation = new Reservation(date1, date2, i % 3, roomDao.findAll().get(i), user);
             reservationDao.save(reservation);
         }
     }

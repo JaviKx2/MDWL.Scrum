@@ -1,5 +1,6 @@
 package controllers;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -30,13 +31,17 @@ public class TokenControllerIT {
 
     @Autowired
     private TokenDao tokenDao;
+    
+    @Test
+    public void testGetUserByTokenValue() {
+        Token token = tokenDao.findAll().get(0);
+        assertEquals(token.getUser(), tokenController.getUserByTokenValue(token.getValue()));
+    }
 
     @Test
     public void testUserHasPermission() {
         User u = userDao.findAll().get(1);      //App manager
         Token token = tokenDao.findByUser(u);
-        System.out.println(u.getEmail());
-        System.out.println(token.getValue());
         assertTrue(tokenController.userHasPermission(token.getValue(), u.getPermissions()));
     }
     

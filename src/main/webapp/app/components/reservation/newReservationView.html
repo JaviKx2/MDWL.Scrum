@@ -64,12 +64,6 @@
                 <input type="number" step="1" min="1" max="{{vm.availabilitySelected.roomCapacity}}" class="form-control" name="numberOfPeople" placeholder="Number of people" ng-model='vm.newReservation.numberOfPeople' required>
             </div>
           </div>
-          <div class="form-group">
-            <label class="control-label label-price text-right col-md-4">User id</label>
-             <div class="col-md-4">
-                <input type="number" step="1" class="form-control" name="userId" placeholder="User id" ng-model='vm.newReservation.userId' required>
-            </div>
-          </div>    
           <div class="form-group"> 
              <div class="col-md-offset-4 col-md-8">
                <input type="submit" class="btn btn-primary" value="Book"> 
@@ -77,18 +71,17 @@
           </div>               
       </form>
     </div>
-    <div ng-show="vm.reservationData">
-        <p>The reservation has been placed!</p>
-        <p>Data:</p>
-        <p>Code: {{vm.reservationData.code}}</p>
-        <p>Entry date: {{vm.reservationData.entryDate}}</p>
-        <p>Departure date: {{vm.reservationData.departureDate}}</p>
-        <p>Number of people: {{vm.reservationData.numberOfPeople}}</p>
-        <p>User id: {{vm.reservationData.userId}}</p>
-        <p>Room id: {{vm.reservationData.roomId}}</p>
-        <p>Hours: {{vm.reservationData.hours}}</p>
-        <p>Price: {{vm.reservationData.price}}</p>
-        <span class="btn btn-primary" ng-click="vm.reload()">Back</span>
+    <div class="container" ng-show="vm.reservationData">
+	    <div class="col-md-offset-4">
+	        <h3>The reservation has been placed!</h3>
+	        <p><strong>Code: {{vm.reservationData.code}}</strong></p>
+	        <p><strong>Entry date: {{vm.reservationData.entryDate}}</strong></p>
+	        <p><strong>Departure date: {{vm.reservationData.departureDate}}</strong></p>
+	        <p><strong>Number of people: {{vm.reservationData.numberOfPeople}}</strong></p>
+	        <p><strong>Hours: {{vm.reservationData.hours}}</strong></p>
+	        <p><strong>Price: {{vm.reservationData.price}}&euro;</strong></p>
+	        <span class="btn btn-primary" ng-click="vm.clickOnOk()">Ok</span>
+	    </div>
     </div>
     <div ng-show="vm.loading">Loading...</div>
     <div ng-show="vm.error">Error in the reservation</div>

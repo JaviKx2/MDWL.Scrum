@@ -3,7 +3,6 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_
 	vm = this;
 	vm.availability = {};
 	vm.selectedAvailability = false;
-	vm.loggedIn = false;
 	vm.redirectAfterLogin = '';
 	
 	var request = config => {
@@ -44,11 +43,14 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_
 	var saveToken = (token) => {
 		$window.localStorage['spring-token'] = token;
         $http.defaults.headers.common['x-access-token'] = token;
-    	vm.loggedIn = true;
 	};
 	
 	var isLoggedIn = () => {
-		return vm.loggedIn;
+		if($window.localStorage['spring-token']) {
+			return true;
+		} else {
+			return false;
+		}
 	};
 	
 	var setRedirectAfterLogin = (redirectPath) => {

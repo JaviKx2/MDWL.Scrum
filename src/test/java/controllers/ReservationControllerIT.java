@@ -26,7 +26,7 @@ import daos.users.UserDao;
 import entities.core.Room;
 import entities.users.User;
 import services.DatabaseSeeder;
-import wrappers.ReservationPostWrapper;
+import wrappers.ReservationCreationWrapper;
 import wrappers.ReservationWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,9 +54,9 @@ public class ReservationControllerIT {
     public void testReservationWithTwoNewAvailabilities() throws ParseException {
         Room room = roomDao.findAll().get(0);
         User user = userDao.findAll().get(1);
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(sdf.parse("31-08-2017 14:20"), sdf.parse("31-08-2017 17:20"),
-                room.getId(), user.getId(), 1);
-        ReservationWrapper reservation = reservationController.add(reservationWrapper);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(sdf.parse("31-08-2017 14:20"), sdf.parse("31-08-2017 17:20"),
+                room.getId(), 1);
+        ReservationWrapper reservation = reservationController.add(reservationWrapper, user);
         assertNotNull(reservation);
         assertEquals(sdf.format(sdf.parse("31-08-2017 14:20")), reservation.getEntryDate());
         assertEquals(sdf.format(sdf.parse("31-08-2017 17:20")), reservation.getDepartureDate());
@@ -80,9 +80,9 @@ public class ReservationControllerIT {
     public void testReservationWithNewAvailabilityBefore() throws ParseException {
         Room room = roomDao.findAll().get(1);
         User user = userDao.findAll().get(1);
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(sdf.parse("31-08-2017 14:20"), sdf.parse("31-08-2017 20:20"),
-                room.getId(), user.getId(), 1);
-        ReservationWrapper reservation = reservationController.add(reservationWrapper);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(sdf.parse("31-08-2017 14:20"), sdf.parse("31-08-2017 20:20"),
+                room.getId(), 1);
+        ReservationWrapper reservation = reservationController.add(reservationWrapper, user);
         assertNotNull(reservation);
         assertEquals(sdf.format(sdf.parse("31-08-2017 14:20")), reservation.getEntryDate());
         assertEquals(sdf.format(sdf.parse("31-08-2017 20:20")), reservation.getDepartureDate());
@@ -103,9 +103,9 @@ public class ReservationControllerIT {
     public void testReservationWithNewAvailabilityAfter() throws ParseException {
         Room room = roomDao.findAll().get(2);
         User user = userDao.findAll().get(1);
-        ReservationPostWrapper reservationWrapper = new ReservationPostWrapper(sdf.parse("31-08-2017 12:20"), sdf.parse("31-08-2017 17:20"),
-                room.getId(), user.getId(), 1);
-        ReservationWrapper reservation = reservationController.add(reservationWrapper);
+        ReservationCreationWrapper reservationWrapper = new ReservationCreationWrapper(sdf.parse("31-08-2017 12:20"), sdf.parse("31-08-2017 17:20"),
+                room.getId(), 1);
+        ReservationWrapper reservation = reservationController.add(reservationWrapper, user);
         assertNotNull(reservation);
         assertEquals(sdf.format(sdf.parse("31-08-2017 12:20")), reservation.getEntryDate());
         assertEquals(sdf.format(sdf.parse("31-08-2017 17:20")), reservation.getDepartureDate());

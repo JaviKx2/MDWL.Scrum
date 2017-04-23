@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 import org.joda.time.DateTime;
 import org.joda.time.Hours;
 
+import entities.users.Encrypting;
 import entities.users.User;
 
 @Entity
@@ -51,12 +52,11 @@ public class Reservation {
 
     }
 
-    public Reservation(String code, Date entryDate, Date departureDate, int numberOfPeople, Room room, User user) {
-        this.code = code;
+    public Reservation(Date entryDate, Date departureDate, int numberOfPeople, Room room, User user) {
         this.entryDate = entryDate;
         this.departureDate = departureDate;
         this.numberOfPeople = numberOfPeople;
-        this.room = room;
+        setRoom(room);
         this.user = user;
         this.hours = Hours.hoursBetween(new DateTime(entryDate), new DateTime(departureDate)).getHours();
         this.price = this.hours * room.getPrice();
@@ -98,16 +98,13 @@ public class Reservation {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public Room getRoom() {
         return room;
     }
 
     public void setRoom(Room room) {
         this.room = room;
+        this.code = new Encrypting().encryptInBase64UrlSafe(room.getId() + System.currentTimeMillis() + "");
     }
 
     public User getUser() {

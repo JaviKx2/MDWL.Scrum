@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import daos.users.TokenDao;
 import daos.users.UserDao;
+import entities.users.Encrypting;
 import entities.users.Token;
 import entities.users.User;
 import wrappers.LoginDataWrapper;
@@ -19,7 +20,8 @@ public class LoginController {
     private TokenDao tokenDao;
     
     public String login(LoginDataWrapper loginDataWrapper){
-        User u =  userDao.findOneByEmailAndPassword(loginDataWrapper.getEmail(), loginDataWrapper.getPassword());
+        String passwordEncrypted = new Encrypting(Encrypting.SHA512).encryptInString(loginDataWrapper.getPassword());
+        User u =  userDao.findOneByEmailAndPassword(loginDataWrapper.getEmail(), passwordEncrypted);
         if (u != null){
             Token tkn = new Token(u);
             tokenDao.save(tkn);
