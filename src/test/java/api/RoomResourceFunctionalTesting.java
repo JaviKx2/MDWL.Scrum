@@ -38,11 +38,6 @@ public class RoomResourceFunctionalTesting {
     
     @Autowired
     private DatabaseSeeder databaseSeeder;
-
-    @BeforeClass
-    public static void populate() {
-        new RestService().populate();
-    }
     
     @Test
     public void testFindAll() {

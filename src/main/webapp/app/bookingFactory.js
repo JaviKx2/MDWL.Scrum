@@ -1,4 +1,4 @@
-booking.factory('BookingFactory', function($rootScope, $http, $q, $window){
+booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_FORMAT, INPUT_DATETIME_MIN_MAX_FORMAT){
 	
 	vm = this;
 	vm.availability = {};
@@ -63,6 +63,15 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window){
 		vm.redirectAfterLogin = '';
 	};
 	
+	var formatDate = (date) => {
+		var dateObject = new Date(date);
+		return moment.utc(dateObject).format(DATE_FORMAT);
+	};
+	
+	var formatToMinMaxDatetime = (dateString) => {
+		return moment.utc(dateString, DATE_FORMAT).format(INPUT_DATETIME_MIN_MAX_FORMAT);
+	};
+	
 	return {
 		request: request,
 		setAvailability: setAvailability,
@@ -73,6 +82,8 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window){
 		isLoggedIn: isLoggedIn,
 		setRedirectAfterLogin: setRedirectAfterLogin,
 		getRedirectAfterLogin: getRedirectAfterLogin,
-		clearRedirectAfterLogin: clearRedirectAfterLogin
+		clearRedirectAfterLogin: clearRedirectAfterLogin,
+		formatDate: formatDate,
+		formatToMinMaxDatetime: formatToMinMaxDatetime
 	};
 });

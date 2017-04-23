@@ -1,5 +1,6 @@
 package controllers;
 
+import static config.Constants.DATE_FORMAT;
 import static org.junit.Assert.assertEquals;
 
 import java.text.ParseException;
@@ -26,17 +27,17 @@ public class AvailabilityControllerIT {
 
     @Autowired
     private AvailabilityDao availabilityDao;
-    
+
     @Autowired
     private DatabaseSeeder dbSeeder;
-    
+
     @Autowired
     private AvailabilityController availabilityController;
-    
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-    
+
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
+
     @Test
-    public void testIfAvailabilityIsCreated() throws ParseException{      
+    public void testIfAvailabilityIsCreated() throws ParseException {
         Date from = dateFormatter.parse("27-09-2017 10:00");
         Date to = dateFormatter.parse("27-09-2017 12:00");
         long countPrev = availabilityDao.count();
@@ -46,6 +47,7 @@ public class AvailabilityControllerIT {
 
     /**
      * Leave database as it was before tests
+     * 
      * @throws ParseException
      */
     @After

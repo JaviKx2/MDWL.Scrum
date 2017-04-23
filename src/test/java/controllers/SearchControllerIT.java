@@ -1,5 +1,6 @@
 package controllers;
 
+import static config.Constants.DATE_FORMAT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -27,7 +28,7 @@ public class SearchControllerIT {
     @Autowired
     private SearchController searchController;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
     @Test
     public void testSearchAllAvailabilitiesBetween16and18() throws ParseException {
@@ -39,8 +40,8 @@ public class SearchControllerIT {
 
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (AvailabilityWrapper availabilityWrapper : avaliabilityWrappers) {
-            Interval availabilityInterval = new Interval(availabilityWrapper.getSlotStartDate().getTime(),
-                    availabilityWrapper.getSlotEndDate().getTime());
+            Interval availabilityInterval = new Interval(sdf.parse(availabilityWrapper.getSlotStartDate()).getTime(),
+                    sdf.parse(availabilityWrapper.getSlotEndDate()).getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
         }
     }
@@ -94,8 +95,8 @@ public class SearchControllerIT {
 
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (AvailabilityWrapper availabilityWrapper : avaliabilityWrappers) {
-            Interval availabilityInterval = new Interval(availabilityWrapper.getSlotStartDate().getTime(),
-                    availabilityWrapper.getSlotEndDate().getTime());
+            Interval availabilityInterval = new Interval(sdf.parse(availabilityWrapper.getSlotStartDate()).getTime(),
+                    sdf.parse(availabilityWrapper.getSlotEndDate()).getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
             assertTrue(availabilityWrapper.getHotelName().contains(hotelName));
             assertTrue(availabilityWrapper.getHotelCity().contains(cityName));

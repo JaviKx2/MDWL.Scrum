@@ -1,6 +1,8 @@
 package entities.core;
 
-import static org.junit.Assert.*;
+import static config.Constants.DATE_FORMAT;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +15,7 @@ public class AvailabilityTest {
 
     private Availability availability;
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    private SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
     @Before
     public void before() throws ParseException {

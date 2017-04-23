@@ -1,5 +1,6 @@
 package api;
 
+import static config.Constants.DATE_FORMAT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -24,23 +25,23 @@ import wrappers.AvailabilityWrapper;
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
 public class SearchResourceFunctionalTesting {
 
-    private SimpleDateFormat dateFormatAPI = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
     @Test
     public void testSearchAllAvailabilitiesBetween16and18() throws ParseException {
-        Date slotStartDate = dateFormatAPI.parse("2017-08-31T16:00:00.000Z");
-        Date slotEndDate = dateFormatAPI.parse("2017-08-31T18:00:00.000Z");
+        Date slotStartDate = dateFormat.parse("31-08-2017 16:00:00");
+        Date slotEndDate = dateFormat.parse("31-08-2017 18:00:00");
 
         List<AvailabilityWrapper> availableRooms = Arrays.asList(
-                new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH).param("slotStartDate", dateFormatAPI.format(slotStartDate))
-                        .param("slotEndDate", dateFormatAPI.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
+                new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH).param("slotStartDate", dateFormat.format(slotStartDate))
+                        .param("slotEndDate", dateFormat.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
 
         assertEquals(7, availableRooms.size());
 
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (AvailabilityWrapper availabilityWrapper : availableRooms) {
-            Interval availabilityInterval = new Interval(availabilityWrapper.getSlotStartDate().getTime(),
-                    availabilityWrapper.getSlotEndDate().getTime());
+            Interval availabilityInterval = new Interval(dateFormat.parse(availabilityWrapper.getSlotStartDate()).getTime(),
+                    dateFormat.parse(availabilityWrapper.getSlotEndDate()).getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
         }
     }
@@ -92,19 +93,19 @@ public class SearchResourceFunctionalTesting {
     public void testSearchHotel1City1AvailabilitiesBetween16and18() throws ParseException {
         String hotelName = "hotel1";
         String city = "city1";
-        Date slotStartDate = dateFormatAPI.parse("2017-08-31T16:00:00.000Z");
-        Date slotEndDate = dateFormatAPI.parse("2017-08-31T18:00:00.000Z");
+        Date slotStartDate = dateFormat.parse("31-08-2017 16:00");
+        Date slotEndDate = dateFormat.parse("31-08-2017 18:00");
 
         List<AvailabilityWrapper> availableRooms = Arrays.asList(new RestBuilder<AvailabilityWrapper[]>(RestService.URL).path(Uris.SEARCH)
-                .param("hotelName", hotelName).param("city", city).param("slotStartDate", dateFormatAPI.format(slotStartDate))
-                .param("slotEndDate", dateFormatAPI.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
+                .param("hotelName", hotelName).param("city", city).param("slotStartDate", dateFormat.format(slotStartDate))
+                .param("slotEndDate", dateFormat.format(slotEndDate)).clazz(AvailabilityWrapper[].class).get().build());
 
         assertEquals(4, availableRooms.size());
 
         Interval searchedInterval = new Interval(slotStartDate.getTime(), slotEndDate.getTime());
         for (AvailabilityWrapper availabilityWrapper : availableRooms) {
-            Interval availabilityInterval = new Interval(availabilityWrapper.getSlotStartDate().getTime(),
-                    availabilityWrapper.getSlotEndDate().getTime());
+            Interval availabilityInterval = new Interval(dateFormat.parse(availabilityWrapper.getSlotStartDate()).getTime(),
+                    dateFormat.parse(availabilityWrapper.getSlotEndDate()).getTime());
             assertTrue(searchedInterval.overlaps(availabilityInterval));
             assertTrue(availabilityWrapper.getHotelName().contains(hotelName));
             assertTrue(availabilityWrapper.getHotelCity().contains(city));

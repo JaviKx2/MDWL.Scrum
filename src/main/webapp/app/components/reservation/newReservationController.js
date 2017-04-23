@@ -29,12 +29,21 @@ booking.controller('NewReservationController', function($route, $location, reser
 			vm.loading = false;	
 			vm.error = false;
 			vm.reservationData = result;
+			vm.newReservation = {};
 		}, errors => {
 			vm.loading = false;
 			vm.error = true;
+			vm.newReservation = {};
 		});
-		vm.newReservation = {};
 	}
+	
+	vm.getMinReservationDate = () => {
+		return BookingFactory.formatToMinMaxDatetime(vm.availabilitySelected.slotStartDate);
+	};
+	
+	vm.getMaxReservationDate = () => {
+		return BookingFactory.formatToMinMaxDatetime(vm.availabilitySelected.slotEndDate);
+	};
 	
 	vm.reload = () => {
 		$route.reload();

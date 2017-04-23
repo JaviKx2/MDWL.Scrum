@@ -1,6 +1,8 @@
 
 package wrappers;
 
+import static config.Constants.DATE_FORMAT;
+
 import java.text.SimpleDateFormat;
 
 import entities.core.Reservation;
@@ -28,7 +30,7 @@ public class ReservationWrapper {
     }
 
     public ReservationWrapper(Reservation reservation) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
         this.entryDate = sdf.format(reservation.getEntryDate());
         this.departureDate = sdf.format(reservation.getDepartureDate());
         this.hours = reservation.getHours();
