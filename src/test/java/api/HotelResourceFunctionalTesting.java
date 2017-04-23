@@ -1,10 +1,12 @@
 package api;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -18,23 +20,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
-import daos.core.HotelDao;
+import daos.core.HotelChainDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
 import entities.core.Hotel;
 import entities.core.HotelChain;
 import entities.core.Room;
-import entities.core.RoomType;
 import entities.users.User;
 import services.DatabaseSeeder;
 import wrappers.HotelWrapper;
-import wrappers.RoomWrapper;
+import wrappers.ReservationWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
-public class RoomResourceFunctionalTesting {
+public class HotelResourceFunctionalTesting {
    
-    private final static int HOTEL_MANAGER = 3;
+    private final static int APP_MANAGER = 4;
 
     @Autowired
     private UserDao userDao;
@@ -43,40 +44,34 @@ public class RoomResourceFunctionalTesting {
     private TokenDao tokenDao;
     
     @Autowired
-    private HotelDao hotelDao;
+    private HotelChainDao hotelChainDao;
     
     @Autowired
     private DatabaseSeeder databaseSeeder;
     
     @Test
     public void testFindAll() {
-        User user = userDao.findAll().get(HOTEL_MANAGER);
+        User user = userDao.findAll().get(APP_MANAGER);
         String tokenValue = tokenDao.findByUser(user).getValue();
-        List<Room> response = Arrays.asList(
-                new RestBuilder<Room[]>(RestService.URL)
-                .path(Uris.ROOMS)
+        List<Hotel> response = Arrays.asList(
+                new RestBuilder<Hotel[]>(RestService.URL)
+                .path(Uris.HOTEL)
                 .header("x-access-token", tokenValue)
                 .get()
-                .clazz(Room[].class)
+                .clazz(Hotel[].class)
                 .build());
         assertNotNull(response);
         assertTrue(response.size() > 0);
     }
     
     @Test
-    public void testAddRoom() throws ParseException {
+    public void testAddHotel() throws ParseException {
         User user = userDao.findAll().get(2);
         String tokenValue = tokenDao.findByUser(user).getValue();
-        List<Hotel> hotel = hotelDao.findAll();
-        RoomWrapper roomWrapper = new RoomWrapper();
-        roomWrapper.setCapacity(8);
-        roomWrapper.setHotel(hotel.get(0));
-        roomWrapper.setNumber(734);
-        roomWrapper.setPrice(200);
-        roomWrapper.setServices("Servicios");
-        roomWrapper.setType(RoomType.SUITE);
-        RoomWrapper room = new RestBuilder<RoomWrapper>(RestService.URL).path(Uris.ROOMS)
-                .body(roomWrapper).header("x-access-token", tokenValue).clazz(RoomWrapper.class).post().build();  
+        List<HotelChain> hotelChain = hotelChainDao.findAll();
+        HotelWrapper hotelWrapper = new HotelWrapper(10, "Nombre Hotel", "Codigo Postal" , "City", user, "Imagen", hotelChain.get(0));
+        HotelWrapper hotel = new RestBuilder<HotelWrapper>(RestService.URL).path(Uris.HOTEL)
+                .body(hotelWrapper).header("x-access-token", tokenValue).clazz(HotelWrapper.class).post().build();  
         assertNotNull(hotel);
     }
 

@@ -9,39 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import wrappers.AvailabilityCreationWrapper;
-import wrappers.RoomWrapper;
-import controllers.RoomController;
+import controllers.AvailabilityController;
+import controllers.HotelController;
 import controllers.TokenController;
+import controllers.UserController;
 import entities.core.Room;
 import entities.users.Permissions;
+import entities.users.User;
+import wrappers.AvailabilityCreationWrapper;
+import wrappers.HotelWrapper;
 
 @RestController
-@RequestMapping(Uris.VERSION + Uris.ROOMS)
-public class RoomResource {
+@RequestMapping(Uris.VERSION + Uris.USER)
+public class UserResource {
 
     @Autowired
-    private RoomController roomController;
+    private UserController userController;
     
     @Autowired
     private TokenController tokenController;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Room> findAll(@RequestHeader("x-access-token") String token) {
+    public List<User> findAll(@RequestHeader("x-access-token") String token) {
         if (tokenController.userHasPermission(token, Permissions.HOTEL_MANAGER)){
-            return roomController.findAll();
+            return userController.findAll();
         }
         return null;
     }
-    
-    @RequestMapping(method = RequestMethod.POST)
-    public RoomWrapper add(@RequestBody RoomWrapper roomWrapper, @RequestHeader("x-access-token") String token) {
-        if (tokenController.userHasPermission(token, Permissions.HOTEL_MANAGER)){
-            return roomController.add(roomWrapper);
-        } else {
-            return null;
-        }
-    }
-    
-    
 }

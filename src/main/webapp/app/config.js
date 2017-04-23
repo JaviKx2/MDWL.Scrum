@@ -15,6 +15,16 @@ booking.config(function ($routeProvider) {
 	        controller: "NewReservationController",
 	        controllerAs: "vm"
 	    })
+	    .when('/newhotel', {
+	        templateUrl: "app/components/hotel/newHotelView.html",
+	        controller: "NewHotelController",
+	        controllerAs: "vm"
+	    })
+	    .when('/newroom', {
+	        templateUrl: "app/components/room/newRoomView.html",
+	        controller: "NewRoomController",
+	        controllerAs: "vm"
+	    })
 	    .when('/login', {
 	        templateUrl: "app/components/login/loginView.html",
 	        controller: "LoginController",
