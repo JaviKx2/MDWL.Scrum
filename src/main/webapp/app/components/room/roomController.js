@@ -24,6 +24,7 @@ booking.controller('NewRoomController', function($route, AvailabilityService, Ro
 		RoomService.addRoom(vm.room).then(result => {
 			vm.loading = false;	
 			vm.error = false;
+			alert("Room created successfully!");
 		}, errors => {
 			vm.loading = false;
 			vm.error = true;
