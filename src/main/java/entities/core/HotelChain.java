@@ -29,6 +29,17 @@ public class HotelChain {
 
     }
 
+    
+    public long getId() {
+        return id;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
     public HotelChain(String name, String logo, User manager) {
         this.name = name;
         this.logo = logo;

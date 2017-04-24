@@ -29,6 +29,7 @@ booking.controller('NewHotelController', function($route, HotelChainService, Hot
  		HotelService.add(vm.hotel).then(result => {
 			vm.loading = false;	
 			vm.error = false;
+			alert("Hotel created successfully!");
 		}, errors => {
 			vm.loading = false;
 			vm.error = true;
@@ -40,6 +41,8 @@ booking.controller('NewHotelController', function($route, HotelChainService, Hot
 			console.log(response);
 			vm.hotelChains = response;
 			vm.hotelChain = vm.hotelChains[0];
+			
+			
 		}, function error(errors) {
 			console.log(errors);
 		});
