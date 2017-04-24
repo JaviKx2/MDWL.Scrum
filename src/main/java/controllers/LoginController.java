@@ -25,7 +25,7 @@ public class LoginController {
         if (u != null){
             Token tkn = new Token(u);
             tokenDao.save(tkn);
-            return "{\"token\": \"" + tkn.getValue() + "\"}";
+            return "{\"token\": \"" + tkn.getValue() + "\", \"permissions\": \"" + tkn.getUser().getPermissions() + "\"}";
         } else {
             return null;
         }
