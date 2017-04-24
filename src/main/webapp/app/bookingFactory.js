@@ -45,13 +45,22 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_
         $http.defaults.headers.common['x-access-token'] = token;
 	};
 	
-	var isLoggedIn = () => {
-		if($window.localStorage['spring-token']) {
-			return true;
-		} else {
-			return false;
-		}
+	var savePermissions = permissions => {
+		$window.localStorage['spring-permissions'] = permissions;
 	};
+	
+	var isLoggedIn = () => {
+		return ($window.localStorage['spring-token'] != undefined);
+	};
+	
+	var getPermissions = () => {
+		return $window.localStorage['spring-permissions'];
+	};
+	
+	var logout = () => {
+		$window.localStorage.removeItem('spring-token');
+		$window.localStorage.removeItem('spring-permissions');
+	}
 	
 	var setRedirectAfterLogin = (redirectPath) => {
 		vm.redirectAfterLogin = redirectPath;
@@ -81,7 +90,10 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_
 		isAvailabilitySelected: isAvailabilitySelected,
 		clearAvailabilty: clearAvailabilty,
 		saveToken: saveToken,
+		savePermissions: savePermissions,
 		isLoggedIn: isLoggedIn,
+		logout: logout,
+		getPermissions: getPermissions,
 		setRedirectAfterLogin: setRedirectAfterLogin,
 		getRedirectAfterLogin: getRedirectAfterLogin,
 		clearRedirectAfterLogin: clearRedirectAfterLogin,
