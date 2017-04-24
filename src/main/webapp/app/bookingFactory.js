@@ -40,17 +40,23 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_
 		vm.selectedAvailability = false;
 	};
 	
+	var isLoggedIn = () => {
+		return ($window.localStorage['spring-token'] != undefined);
+	};
+	
+	var setHttpAccessTokenHeader = () => {
+		if (isLoggedIn) {
+			$http.defaults.headers.common['x-access-token'] = $window.localStorage['spring-token'];
+		}
+	};
+	
 	var saveToken = (token) => {
 		$window.localStorage['spring-token'] = token;
-        $http.defaults.headers.common['x-access-token'] = token;
+		setHttpAccessTokenHeader();
 	};
 	
 	var savePermissions = permissions => {
 		$window.localStorage['spring-permissions'] = permissions;
-	};
-	
-	var isLoggedIn = () => {
-		return ($window.localStorage['spring-token'] != undefined);
 	};
 	
 	var getPermissions = () => {
@@ -82,6 +88,8 @@ booking.factory('BookingFactory', function($rootScope, $http, $q, $window, DATE_
 	var formatToMinMaxDatetime = (dateString) => {
 		return moment.utc(dateString, DATE_FORMAT).format(INPUT_DATETIME_MIN_MAX_FORMAT);
 	};
+	
+	setHttpAccessTokenHeader();
 	
 	return {
 		request: request,

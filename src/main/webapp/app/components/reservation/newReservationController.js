@@ -27,8 +27,12 @@ booking.controller('NewReservationController', function($route, $location, reser
 	vm.submitReservation = () => {
  		reservationService.add(vm.newReservation).then(result => {
 			vm.loading = false;	
-			vm.error = false;
-			vm.reservationData = result;
+			if(result) {
+				vm.error = false;
+				vm.reservationData = result;
+			} else {
+				vm.error = true;
+			}
 			vm.newReservation = {};
 		}, errors => {
 			vm.loading = false;
