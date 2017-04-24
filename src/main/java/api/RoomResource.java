@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import wrappers.AvailabilityCreationWrapper;
-import wrappers.RoomWrapper;
 import controllers.RoomController;
 import controllers.TokenController;
 import entities.core.Room;
 import entities.users.Permissions;
+import wrappers.RoomWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.ROOMS)
