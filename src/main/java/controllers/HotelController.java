@@ -31,7 +31,8 @@ public class HotelController {
         Hotel hotel = new Hotel();
         hotel.setName(hotelWrapper.getName());
         hotel.setCity(hotelWrapper.getCity());
-        hotel.setHotelChain(hotelChainDao.findOne(hotelWrapper.getHotelChain()));
+        System.out.println("HOTEL CHAIN" + hotel.getHotelChain());
+        hotel.setHotelChain(hotelChainDao.findOne(hotelWrapper.getHotelChainId()));
         hotel.setImage(hotelWrapper.getImage());
         hotel.setManager(hotelWrapper.getManager());
         hotel.setPostcode(hotelWrapper.getPostcode());

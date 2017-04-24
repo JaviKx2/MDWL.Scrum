@@ -79,12 +79,12 @@ public class HotelWrapper {
         this.image = image;
     }
 
-    public long getHotelChain() {
+    public long getHotelChainId() {
         return hotelChainId;
     }
 
-    public void setHotelChain(long hotelChain) {
-        this.hotelChainId = hotelChain;
+    public void setHotelChain(long hotelChainId) {
+        this.hotelChainId = hotelChainId;
     }
 
     @Override
