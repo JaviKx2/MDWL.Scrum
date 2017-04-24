@@ -1,4 +1,4 @@
-booking.controller('LoginController', function($location, loginService, BookingFactory) {
+booking.controller('LoginController', function($location, $window, loginService, BookingFactory) {
 	"use strict";
 	
 	var vm = this;
@@ -11,13 +11,15 @@ booking.controller('LoginController', function($location, loginService, BookingF
 		loginService.login(vm.loginData).then(result => {
 			if (result.token){
 				vm.error = false;
-				BookingFactory.saveToken(result.token);
+				BookingFactory.saveToken(result.token);		
+				BookingFactory.savePermissions(result.permissions);	
 				var redirectAfterLogin = BookingFactory.getRedirectAfterLogin();
 				if (redirectAfterLogin !== '') {
 					BookingFactory.clearRedirectAfterLogin()
 					$location.path(redirectAfterLogin);
 				} else {
 					$location.path("/search");
+					$window.location.reload();
 				}
 			} else {
 				vm.error = true;
