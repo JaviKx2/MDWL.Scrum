@@ -3,32 +3,35 @@ package controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.transform.impl.AddDelegateTransformer;
 import org.springframework.stereotype.Controller;
 
-import wrappers.HotelWrapper;
-import wrappers.RoomWrapper;
+import daos.core.HotelChainDao;
 import daos.core.HotelDao;
-import daos.core.RoomDao;
 import entities.core.Hotel;
-import entities.core.HotelChain;
-import entities.core.Room;
+import wrappers.HotelWrapper;
 
 @Controller
 public class HotelController {
     
     private HotelDao hotelDao;
     
+    private HotelChainDao hotelChainDao;
+    
     @Autowired
     public void setHotelDao(HotelDao hotelDao){
         this.hotelDao = hotelDao;
+    }
+    
+    @Autowired
+    public void setHotelChainDao(HotelChainDao hotelChainDao){
+        this.hotelChainDao = hotelChainDao;
     }
     
     public HotelWrapper add (HotelWrapper hotelWrapper){
         Hotel hotel = new Hotel();
         hotel.setName(hotelWrapper.getName());
         hotel.setCity(hotelWrapper.getCity());
-        hotel.setHotelChain(hotelWrapper.getHotelChain());
+        hotel.setHotelChain(hotelChainDao.findOne(hotelWrapper.getHotelChain()));
         hotel.setImage(hotelWrapper.getImage());
         hotel.setManager(hotelWrapper.getManager());
         hotel.setPostcode(hotelWrapper.getPostcode());

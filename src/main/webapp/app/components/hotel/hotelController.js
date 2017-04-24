@@ -1,14 +1,17 @@
-booking.controller('NewHotelController', function($route, HotelChainService, HotelService) {
+booking.controller('NewHotelController', function($route, HotelChainService, HotelService, UserService) {
 	"use strict";
 	
 	var vm = this;
 	
 	vm.hotelChain = {};
 	vm.hotelChains = [];
+	vm.user = {};
+	vm.users = [];
 	vm.hotel = {};
 	vm.name = "";
 	vm.postcode = "";
 	vm.city = "";
+	vm.image = "";
 	
 	vm.loading = false;
 	vm.error = false;
@@ -18,7 +21,9 @@ booking.controller('NewHotelController', function($route, HotelChainService, Hot
 				name: vm.name,
 				postcode: vm.postcode,
 				city: vm.city,
-				hotelChain : vm.hotelChain
+				hotelChainId: vm.hotelChain.id,
+				manager: vm.user,
+				image: vm.image
 		}
 		console.log(vm.hotel);
  		HotelService.add(vm.hotel).then(result => {
@@ -34,7 +39,17 @@ booking.controller('NewHotelController', function($route, HotelChainService, Hot
 		HotelChainService.findAll().then(function success(response) {
 			console.log(response);
 			vm.hotelChains = response;
-			vm.hotelChain = vm.hotelChains[0].name;
+			vm.hotelChain = vm.hotelChains[0];
+		}, function error(errors) {
+			console.log(errors);
+		});
+	}
+
+	vm.listUsers = () => {
+		UserService.findAllUsers().then(function success(response) {
+			console.log(response);
+			vm.users = response;
+			vm.user = vm.user[0];
 		}, function error(errors) {
 			console.log(errors);
 		});

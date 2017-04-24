@@ -1,6 +1,5 @@
 package wrappers;
 
-import entities.core.HotelChain;
 import entities.users.User;
 
 public class HotelWrapper {
@@ -16,121 +15,90 @@ public class HotelWrapper {
 
     private String image;
 
-    private HotelChain hotelChain;
+    private long hotelChainId;
 
-    public HotelWrapper(){
-        
+    public HotelWrapper() {
+
     }
 
-   
-    public HotelWrapper(long id, String name, String postcode, String city, User manager, String image, HotelChain hotelChain) {
+    public HotelWrapper(long id, String name, String postcode, String city, User manager, String image, long hotelChainId) {
         this.id = id;
         this.name = name;
         this.postcode = postcode;
         this.city = city;
         this.manager = manager;
         this.image = image;
-        this.hotelChain = hotelChain;
+        this.hotelChainId = hotelChainId;
     }
-
-
 
     public long getId() {
         return id;
     }
 
-
-
     public void setId(long id) {
         this.id = id;
     }
-
-
 
     public String getName() {
         return name;
     }
 
-
-
     public void setName(String name) {
         this.name = name;
     }
-
-
 
     public String getPostcode() {
         return postcode;
     }
 
-
-
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
-
-
 
     public String getCity() {
         return city;
     }
 
-
-
     public void setCity(String city) {
         this.city = city;
     }
-
-
 
     public User getManager() {
         return manager;
     }
 
-
-
     public void setManager(User manager) {
         this.manager = manager;
     }
-
-
 
     public String getImage() {
         return image;
     }
 
-
-
     public void setImage(String image) {
         this.image = image;
     }
 
-
-
-    public HotelChain getHotelChain() {
-        return hotelChain;
+    public long getHotelChain() {
+        return hotelChainId;
     }
 
-
-
-    public void setHotelChain(HotelChain hotelChain) {
-        this.hotelChain = hotelChain;
+    public void setHotelChain(long hotelChain) {
+        this.hotelChainId = hotelChain;
     }
 
     @Override
     public String toString() {
         return "HotelWrapper [id=" + id + ", name=" + name + ", postcode=" + postcode + ", city=" + city + ", manager=" + manager
-                + ", image=" + image + ", hotelChain=" + hotelChain + "]";
+                + ", image=" + image + ", hotelChain=" + hotelChainId + "]";
     }
 
-    
-    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((city == null) ? 0 : city.hashCode());
-        result = prime * result + ((hotelChain == null) ? 0 : hotelChain.hashCode());
+        result = prime * result + (int) (hotelChainId ^ (hotelChainId >>> 32));
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((image == null) ? 0 : image.hashCode());
         result = prime * result + ((manager == null) ? 0 : manager.hashCode());
@@ -153,10 +121,7 @@ public class HotelWrapper {
                 return false;
         } else if (!city.equals(other.city))
             return false;
-        if (hotelChain == null) {
-            if (other.hotelChain != null)
-                return false;
-        } else if (!hotelChain.equals(other.hotelChain))
+        if (hotelChainId != other.hotelChainId)
             return false;
         if (id != other.id)
             return false;
@@ -182,6 +147,7 @@ public class HotelWrapper {
             return false;
         return true;
     }
+
     
-    
+
 }

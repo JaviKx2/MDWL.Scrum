@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,6 @@ import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
 import daos.users.TokenDao;
 import daos.users.UserDao;
-import entities.core.HotelChain;
-import entities.core.Room;
 import entities.users.User;
 import services.DatabaseSeeder;
 
@@ -29,7 +26,7 @@ import services.DatabaseSeeder;
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
 public class UserResourceFunctionalTesting {
    
-    private final static int APP_MANAGER = 4;
+    private final static int HOTEL_MANAGER = 3;
 
     @Autowired
     private UserDao userDao;
@@ -42,11 +39,11 @@ public class UserResourceFunctionalTesting {
     
     @Test
     public void testFindAll() {
-        User user = userDao.findAll().get(APP_MANAGER);
+        User user = userDao.findAll().get(HOTEL_MANAGER);
         String tokenValue = tokenDao.findByUser(user).getValue();
         List<User> response = Arrays.asList(
                 new RestBuilder<User[]>(RestService.URL)
-                .path(Uris.HOTEL_CHAIN)
+                .path(Uris.USER)
                 .header("x-access-token", tokenValue)
                 .get()
                 .clazz(User[].class)

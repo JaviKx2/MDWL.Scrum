@@ -14,8 +14,8 @@
             <div class="row">
                 <div class="col-md-5">
 			        <div class="form-group">
-			            <label for="room-select">Hotel Chain:</label> <select
-			                class="form-control" id="room-select"
+			            <label for="hotelchain-select">Hotel Chain:</label> <select
+			                class="form-control" id="hotelchain-select"
 			                data-ng-init="vm.listHotelChains()" data-ng-model="vm.hotelChain"
 			                data-ng-options="item.name for item in vm.hotelChains">
 			            </select>
@@ -23,28 +23,43 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label label-reference col-md-1">Name:</label>
-                    <input type="text" ng-model='vm.name' id="slotStartDateInput" class="form-control" />
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="user-select">User:</label> <select
+                            class="form-control" id="user-select"
+                            data-ng-init="vm.listUsers()" data-ng-model="vm.user"
+                            data-ng-options="item.name for item in vm.users">
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label class="control-label label-reference col-md-1">City:</label>
-                    <input type="text" ng-model='vm.city' id="slotStartDateInput" class="form-control" />
+                    <label class="control-label label-reference col-md-1">Name:</label>
+                    <input type="text" data-ng-model='vm.name' id="name" class="form-control" />
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label label-reference col-md-1">Post Code:</label>
-                    <input type="text" ng-model='vm.postcode' id="slotStartDateInput" class="form-control" />
+                    <input type="number" data-ng-model='vm.postcode' id="postCode" class="form-control" />
                 </div>
             </div>
-            
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">City:</label>
+                    <input type="text" data-ng-model='vm.city' id="city" class="form-control" />
+                </div>
+            </div>         
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label label-reference col-md-1">Image:</label>
+                    <input type="text" data-ng-model='vm.image' id="image" class="form-control" />
+                </div>
+            </div>  
             <div class="row">
                 <div class="form-group col-md-2 col-md-offset-5">
-                     <button class="btn btn-primary btn-lg" ng-click="vm.onClickSubmitButton()">
-                        <span class="glyphicon glyphicon-search"></span>
+                     <button class="btn btn-primary btn-lg" data-ng-click="vm.onClickSubmitButton()">
                         Submit
                     </button>
                 </div>
