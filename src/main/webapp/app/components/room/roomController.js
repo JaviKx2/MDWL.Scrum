@@ -5,17 +5,22 @@ booking.controller('NewRoomController', function($route, AvailabilityService, Ro
 	
 	vm.loading = false;
 	vm.error = false;
-	vm.types = ["tipo 1", "tipo 2", "tipo 3"];
+	vm.types = ["SINGLE", "DOUBLE", "TRIPLE", "SUITE"];
 	vm.roomType = vm.types[0];
+	vm.hotels = [];
+	vm.hotel = {};
 
 	
 	vm.onClickSubmitButton = () => {
 		vm.room = {
+				hotel: vm.hotel,
 				price: vm.price,
 				capacity: vm.capacity,
 				services: vm.services,
-				number: vm.number
-		}
+				number: vm.number,
+				type: vm.roomType
+		};
+		console.log(vm.room);
 		RoomService.addRoom(vm.room).then(result => {
 			vm.loading = false;	
 			vm.error = false;
@@ -29,7 +34,7 @@ booking.controller('NewRoomController', function($route, AvailabilityService, Ro
 		HotelService.findAll().then(function success(response) {
 			console.log(response);
 			vm.hotels = response;
-			vm.hotel = vm.hotels[0].name;
+			vm.hotel = vm.hotels[0];
 		}, function error(errors) {
 			console.log(errors);
 		});

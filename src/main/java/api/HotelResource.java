@@ -9,13 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import controllers.AvailabilityController;
 import controllers.HotelController;
 import controllers.TokenController;
 import entities.core.Hotel;
-import entities.core.HotelChain;
 import entities.users.Permissions;
-import wrappers.AvailabilityCreationWrapper;
 import wrappers.HotelWrapper;
 
 @RestController
