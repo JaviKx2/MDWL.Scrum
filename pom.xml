@@ -54,9 +54,9 @@
 			<properties>
 				<logs.level>debug</logs.level>
 				<logs.path>target/logs</logs.path>
-				<database.url>jdbc:mysql://db4free.net:3307/scrumbook</database.url>
-				<database.user>rootbook</database.user>
-				<database.password>book-scrum</database.password>
+				<database.url>jdbc:mysql://localhost:3306/booking</database.url>
+				<database.user>root</database.user>
+				<database.password></database.password>
 				<hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
 				<tomcat.url>http://localhost:8080/manager/text</tomcat.url>
 			</properties>
@@ -94,9 +94,9 @@
 			<properties>
 				<logs.level>error</logs.level>
 				<logs.path>../logs</logs.path>
-                <database.url>jdbc:mysql://db4free.net:3307/scrumbook</database.url>
-                <database.user>rootbook</database.user>
-                <database.password>book-scrum</database.password>
+                <database.url>jdbc:mysql://localhost:3306/booking</database.url>
+                <database.user>root</database.user>
+                <database.password></database.password>
 				<hibernate.hbm2ddl.auto>create</hibernate.hbm2ddl.auto>
 				<tomcat.url></tomcat.url>
 			</properties>
